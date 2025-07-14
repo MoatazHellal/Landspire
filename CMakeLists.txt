@@ -14,7 +14,14 @@ qt_add_executable(Landspire
     connectdialogue.h connectdialogue.cpp
     server.h server.cpp
     clientconnection.h clientconnection.cpp
+    cardAffinities.h
+    cardwidget.h cardwidget.cpp
+    cardwidget.h
+    resources.qrc
 )
+
+qt_add_resources(RESOURCES resources.qrc)
+target_sources(Landspire PRIVATE ${RESOURCES})
 
 target_link_libraries(Landspire
     PRIVATE

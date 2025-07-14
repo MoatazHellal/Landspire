@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "cardwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,6 +31,8 @@ private:
 
     void createActions();
     void createMenus();
+
+    QVector<cardWidget*> createCardWidgets();
 
     QMenu* landspireMenu;
     QMenu* helpMenu;

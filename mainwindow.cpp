@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "connectdialogue.h"
+#include "cardwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,6 +13,22 @@ MainWindow::MainWindow(QWidget *parent)
 
     createActions();
     createMenus();
+
+    ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200,280));
+
+    QVector<cardWidget*> cards = createCardWidgets();
+    int maxCols = 6;
+    int row = 0, col = 0;
+    foreach (auto card, cards) {
+        ui->CardsGrid->addWidget(card, row, col);
+        if (++col >= maxCols)
+        {
+            col = 0;
+            ++row;
+        }
+        connect(card, &cardWidget::hovered, this, [this](cardWidget* c) {
+            ui->CardPreview->setPixmap(QPixmap(":/cards/" + c->name().toLower().replace(" ", "_") + ".png").scaled(200, 280));});
+    }
 }
 
 MainWindow::~MainWindow()
@@ -104,4 +121,20 @@ void MainWindow::about()
 void MainWindow::gameRules()
 {
 
+}
+
+QVector<cardWidget*> MainWindow::createCardWidgets()
+{
+    QVector<cardWidget*> cards;
+
+    cardWidget* card = new cardWidget("Fire Village", Affinity::Fire, QPixmap(":/cards/card.png"));
+    cards.append(card);
+    cardWidget* card1 = new cardWidget("Fire Village", Affinity::Fire, QPixmap(":/cards/card.png"));
+    cards.append(card1);
+    cardWidget* card2 = new cardWidget("Fire Village", Affinity::Fire, QPixmap(":/cards/card.png"));
+    cards.append(card2);
+    cardWidget* card3 = new cardWidget("Fire Village", Affinity::Fire, QPixmap(":/cards/card.png"));
+    cards.append(card3);
+
+    return cards;
 }

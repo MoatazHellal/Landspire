@@ -21,6 +21,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -29,7 +30,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QGridLayout *gridLayout_2;
+    QHBoxLayout *horizontalLayout;
     QTabWidget *tabWidget;
     QWidget *tab;
     QHBoxLayout *horizontalLayout_2;
@@ -40,10 +41,15 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QWidget *tab_2;
     QHBoxLayout *horizontalLayout_4;
+    QHBoxLayout *horizontalLayout_3;
+    QWidget *CardsGridContainer;
     QGridLayout *gridLayout_3;
-    QListView *listView_6;
-    QListView *listView_2;
-    QLabel *label_2;
+    QGridLayout *CardsGrid;
+    QWidget *RightPane;
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout;
+    QLabel *CardPreview;
+    QListView *DeckList;
     QWidget *tab_3;
     QGridLayout *gridLayout_5;
     QListWidget *listWidget;
@@ -58,8 +64,8 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        gridLayout_2 = new QGridLayout(centralwidget);
-        gridLayout_2->setObjectName("gridLayout_2");
+        horizontalLayout = new QHBoxLayout(centralwidget);
+        horizontalLayout->setObjectName("horizontalLayout");
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName("tabWidget");
         tab = new QWidget();
@@ -94,25 +100,48 @@ public:
         tab_2->setObjectName("tab_2");
         horizontalLayout_4 = new QHBoxLayout(tab_2);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        gridLayout_3 = new QGridLayout();
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        CardsGridContainer = new QWidget(tab_2);
+        CardsGridContainer->setObjectName("CardsGridContainer");
+        gridLayout_3 = new QGridLayout(CardsGridContainer);
         gridLayout_3->setObjectName("gridLayout_3");
-        listView_6 = new QListView(tab_2);
-        listView_6->setObjectName("listView_6");
+        CardsGrid = new QGridLayout();
+        CardsGrid->setObjectName("CardsGrid");
 
-        gridLayout_3->addWidget(listView_6, 1, 1, 1, 1);
-
-        listView_2 = new QListView(tab_2);
-        listView_2->setObjectName("listView_2");
-
-        gridLayout_3->addWidget(listView_2, 0, 0, 2, 1);
-
-        label_2 = new QLabel(tab_2);
-        label_2->setObjectName("label_2");
-
-        gridLayout_3->addWidget(label_2, 0, 1, 1, 1);
+        gridLayout_3->addLayout(CardsGrid, 0, 0, 1, 1);
 
 
-        horizontalLayout_4->addLayout(gridLayout_3);
+        horizontalLayout_3->addWidget(CardsGridContainer);
+
+        RightPane = new QWidget(tab_2);
+        RightPane->setObjectName("RightPane");
+        verticalLayout_2 = new QVBoxLayout(RightPane);
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName("verticalLayout");
+        CardPreview = new QLabel(RightPane);
+        CardPreview->setObjectName("CardPreview");
+
+        verticalLayout->addWidget(CardPreview);
+
+        DeckList = new QListView(RightPane);
+        DeckList->setObjectName("DeckList");
+
+        verticalLayout->addWidget(DeckList);
+
+        verticalLayout->setStretch(0, 3);
+        verticalLayout->setStretch(1, 2);
+
+        verticalLayout_2->addLayout(verticalLayout);
+
+
+        horizontalLayout_3->addWidget(RightPane);
+
+        horizontalLayout_3->setStretch(0, 3);
+        horizontalLayout_3->setStretch(1, 2);
+
+        horizontalLayout_4->addLayout(horizontalLayout_3);
 
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
@@ -131,7 +160,7 @@ public:
 
         tabWidget->addTab(tab_3, QString());
 
-        gridLayout_2->addWidget(tabWidget, 0, 0, 1, 1);
+        horizontalLayout->addWidget(tabWidget);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -144,7 +173,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -155,7 +184,7 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Home", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        CardPreview->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Deck", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Lobby", nullptr));
     } // retranslateUi

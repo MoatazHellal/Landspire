@@ -320,6 +320,7 @@
 		"C:/Qt/6.9.1/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginAdditionalTargetInfo.cmake",
 		"C:/Qt/6.9.1/mingw_64/lib/cmake/Qt6Network/Qt6NetworkVersionlessAliasTargets.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/GNUInstallDirs.cmake",
+		"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/resources.qrc",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/GNUInstallDirs.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire",
@@ -328,6 +329,18 @@
 	"DEP_FILE_RULE_NAME" : "Landspire_autogen/timestamp",
 	"HEADERS" : 
 	[
+		[
+			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardAffinities.h",
+			"MU",
+			"EWIEGA46WW/moc_cardAffinities.cpp",
+			null
+		],
+		[
+			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardwidget.h",
+			"MU",
+			"EWIEGA46WW/moc_cardwidget.cpp",
+			null
+		],
 		[
 			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/clientconnection.h",
 			"MU",
@@ -414,7 +427,10 @@
 	],
 	"MOC_PREDEFS_FILE" : "C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/Landspire_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
-	"MOC_SKIP" : [],
+	"MOC_SKIP" : 
+	[
+		"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/qrc_resources.cpp"
+	],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 10,
 	"PARSE_CACHE_FILE" : "C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/Landspire_autogen.dir/ParseCache.txt",
@@ -425,6 +441,11 @@
 	"SETTINGS_FILE" : "C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/Landspire_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardwidget.cpp",
+			"MU",
+			null
+		],
 		[
 			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/clientconnection.cpp",
 			"MU",
@@ -453,7 +474,10 @@
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],
-	"UIC_SKIP" : [],
+	"UIC_SKIP" : 
+	[
+		"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/qrc_resources.cpp"
+	],
 	"UIC_UI_FILES" : [],
 	"USE_BETTER_GRAPH" : true,
 	"VERBOSITY" : 0
