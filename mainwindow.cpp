@@ -3,6 +3,8 @@
 
 #include "connectdialogue.h"
 #include "cardwidget.h"
+#include <qevent.h>
+#include <QMimeData>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200,280));
 
+    deckModel = new QStringListModel(this);
+    ui->DeckList->setModel(deckModel);
+
     QVector<cardWidget*> cards = createCardWidgets();
     int maxCols = 6;
     int row = 0, col = 0;
@@ -26,9 +31,19 @@ MainWindow::MainWindow(QWidget *parent)
             col = 0;
             ++row;
         }
-        connect(card, &cardWidget::hovered, this, [this](cardWidget* c) {
-            ui->CardPreview->setPixmap(QPixmap(":/cards/" + c->name().toLower().replace(" ", "_") + ".png").scaled(200, 280));});
+
+        connect(card, &cardWidget::hovered, this, &MainWindow::setCardPreview);
+        connect(card, &cardWidget::rightClicked, this, &MainWindow::addCard);
+
     }
+
+    ui->DeckList->setAcceptDrops(true);
+    ui->DeckList->setDropIndicatorShown(true);
+    ui->DeckList->setDragDropMode(QAbstractItemView::DropOnly);
+    ui->DeckList->installEventFilter(this);
+
+
+    connect(ui->ClearDeck, &QPushButton::clicked, this, &MainWindow::clearDeck);
 }
 
 MainWindow::~MainWindow()
@@ -127,14 +142,79 @@ QVector<cardWidget*> MainWindow::createCardWidgets()
 {
     QVector<cardWidget*> cards;
 
-    cardWidget* card = new cardWidget("Fire Village", Affinity::Fire, QPixmap(":/cards/card.png"));
+    cardWidget* card = new cardWidget("Fire Village", Affinity::Fire, "Fire village", QPixmap(":/cards/card.png"));
     cards.append(card);
-    cardWidget* card1 = new cardWidget("Fire Village", Affinity::Fire, QPixmap(":/cards/card.png"));
+    cardWidget* card1 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
     cards.append(card1);
-    cardWidget* card2 = new cardWidget("Fire Village", Affinity::Fire, QPixmap(":/cards/card.png"));
+    cardWidget* card2 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
     cards.append(card2);
-    cardWidget* card3 = new cardWidget("Fire Village", Affinity::Fire, QPixmap(":/cards/card.png"));
+    cardWidget* card3 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
     cards.append(card3);
 
     return cards;
+}
+
+void MainWindow::addCard(cardWidget* card)
+{
+    QStringList deck = deckModel->stringList();
+    deck << card->name();
+    deckModel->setStringList(deck);
+    int cardCount = ui->CardCount->text().toInt();
+    cardCount++;
+    ui->CardCount->setText(QString::number(cardCount));
+}
+
+void MainWindow::clearDeck()
+{
+    deckModel->setStringList({});
+    ui->CardCount->setText("0");
+}
+
+void MainWindow::setCardPreview(cardWidget* card)
+{
+            ui->CardPreview->setPixmap(QPixmap(":/cards/" + card->name().toLower().replace(" ", "_") + ".png").scaled(200, 280));
+            ui->CardDescription->setText(card->description());
+}
+
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
+{
+    if (watched == ui->DeckList) {
+        if (event->type() == QEvent::DragEnter || event->type() == QEvent::DragMove) {
+            auto dragEvent = static_cast<QDragMoveEvent*>(event);
+            if (dragEvent->mimeData()->hasText()) {
+                dragEvent->acceptProposedAction();
+                return true;
+            }
+        } else if (event->type() == QEvent::Drop) {
+            if (auto dropEvent = dynamic_cast<QDropEvent*>(event)) {
+                if (dropEvent->mimeData()->hasText()) {
+                    QString name = dropEvent->mimeData()->text();
+
+                    QStringList deck = deckModel->stringList();
+                    deck << name;
+                    deckModel->setStringList(deck);
+
+                    dropEvent->acceptProposedAction();
+                    int cardCount = ui->CardCount->text().toInt();
+                    cardCount++;
+                    ui->CardCount->setText(QString::number(cardCount));
+                    return true;
+                }
+            }
+        }
+        else if (event->type() == QEvent::ContextMenu) {
+            QContextMenuEvent* contextEvent = static_cast<QContextMenuEvent*>(event);
+            QModelIndex index = ui->DeckList->indexAt(contextEvent->pos());
+
+            if (index.isValid()) {
+                QStringList deck = deckModel->stringList();
+                deck.removeAt(index.row());
+                deckModel->setStringList(deck);
+                ui->CardCount->setText(QString::number(deck.size()));
+                return true;
+            }
+        }
+    }
+
+    return QMainWindow::eventFilter(watched, event);
 }

@@ -43,7 +43,8 @@ template <> constexpr inline auto cardWidget::qt_create_metaobjectdata<qt_meta_t
         "",
         "cardWidget*",
         "card",
-        "clicked"
+        "clicked",
+        "rightClicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -53,6 +54,10 @@ template <> constexpr inline auto cardWidget::qt_create_metaobjectdata<qt_meta_t
         }}),
         // Signal 'clicked'
         QtMocHelpers::SignalData<void(cardWidget *)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 3, 4 },
+        }}),
+        // Signal 'rightClicked'
+        QtMocHelpers::SignalData<void(cardWidget *)>(6, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 3, 4 },
         }}),
     };
@@ -80,6 +85,7 @@ void cardWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->hovered((*reinterpret_cast< std::add_pointer_t<cardWidget*>>(_a[1]))); break;
         case 1: _t->clicked((*reinterpret_cast< std::add_pointer_t<cardWidget*>>(_a[1]))); break;
+        case 2: _t->rightClicked((*reinterpret_cast< std::add_pointer_t<cardWidget*>>(_a[1]))); break;
         default: ;
         }
     }
@@ -100,12 +106,21 @@ void cardWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
                 *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< cardWidget* >(); break;
             }
             break;
+        case 2:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< cardWidget* >(); break;
+            }
+            break;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
         if (QtMocHelpers::indexOfMethod<void (cardWidget::*)(cardWidget * )>(_a, &cardWidget::hovered, 0))
             return;
         if (QtMocHelpers::indexOfMethod<void (cardWidget::*)(cardWidget * )>(_a, &cardWidget::clicked, 1))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (cardWidget::*)(cardWidget * )>(_a, &cardWidget::rightClicked, 2))
             return;
     }
 }
@@ -129,14 +144,14 @@ int cardWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
@@ -151,5 +166,11 @@ void cardWidget::hovered(cardWidget * _t1)
 void cardWidget::clicked(cardWidget * _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
+}
+
+// SIGNAL 2
+void cardWidget::rightClicked(cardWidget * _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
 }
 QT_WARNING_POP

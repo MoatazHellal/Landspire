@@ -2,9 +2,11 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QMouseEvent>
+#include <QMimeData>
+#include <QDrag>
 #include "cardAffinities.h"
 
-cardWidget::cardWidget(const QString& name, const Affinity affinity, const QPixmap& pixmap, QWidget* parent) : QFrame(parent), m_name(name), m_affinity(affinity)
+cardWidget::cardWidget(const QString& name, const Affinity affinity, const QString& description, const QPixmap& pixmap, QWidget* parent) : QFrame(parent), m_name(name), m_description(description), m_affinity(affinity)
 {
     setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
     setLineWidth(2);
@@ -23,6 +25,11 @@ cardWidget::cardWidget(const QString& name, const Affinity affinity, const QPixm
 QString cardWidget::name() const
 {
     return m_name;
+}
+
+QString cardWidget::description() const
+{
+    return m_description;
 }
 
 Affinity cardWidget::affinity() const
@@ -47,7 +54,19 @@ void cardWidget::leaveEvent(QEvent* event)
 
 void cardWidget::mousePressEvent(QMouseEvent* event)
 {
-    emit clicked(this);
+    if (event->button() == Qt::LeftButton) {
+        auto mimeData = new QMimeData();
+        mimeData->setText(m_name);
+
+        auto drag = new QDrag(this);
+        drag->setMimeData(mimeData);
+
+        drag->exec(Qt::CopyAction);
+    }
+    else if (event->button() == Qt::RightButton)
+    {
+        emit rightClicked(this);
+    }
     QFrame::mousePressEvent(event);
 }
 

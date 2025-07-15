@@ -13,8 +13,9 @@ class cardWidget : public QFrame
     Q_OBJECT
 
 public:
-    explicit cardWidget(const QString& name, const Affinity affinity, const QPixmap& pixmap, QWidget* parent = nullptr);
+    explicit cardWidget(const QString& name, const Affinity affinity, const QString& description, const QPixmap& pixmap, QWidget* parent = nullptr);
     QString name() const;
+    QString description() const;
     Affinity affinity() const;
     QLabel* imageLabel() const;
 
@@ -26,9 +27,11 @@ protected:
 signals:
     void hovered(cardWidget* card);
     void clicked(cardWidget* card);
+    void rightClicked(cardWidget* card);
 
 private:
     QString m_name;
+    QString m_description;
     Affinity m_affinity;
     QLabel* m_imageLabel;
 };

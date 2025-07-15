@@ -375,6 +375,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/connectdialogue.h
 C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QString
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QStringListModel
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/q17memory.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/q20functional.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/q20iterator.h
@@ -382,6 +383,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/q20type_traits.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/q20utility.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/q23utility.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qabstractitemmodel.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qalgorithms.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qanystringview.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qarraydata.h
@@ -465,6 +467,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qstringconverter_base.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qstringfwd.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qstringlist.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qstringlistmodel.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qstringliteral.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qstringmatcher.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qstringtokenizer.h

@@ -2,6 +2,7 @@ Landspire_autogen/timestamp: \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/QMap \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/QSet \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
+	C:/Qt/6.9.1/mingw_64/include/QtCore/QStringListModel \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/q17memory.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/q20functional.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/q20iterator.h \
@@ -9,6 +10,7 @@ Landspire_autogen/timestamp: \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/q20type_traits.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/q20utility.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/q23utility.h \
+	C:/Qt/6.9.1/mingw_64/include/QtCore/qabstractitemmodel.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/qalgorithms.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/qanystringview.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/qarraydata.h \
@@ -93,6 +95,7 @@ Landspire_autogen/timestamp: \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/qstringconverter_base.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/qstringfwd.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/qstringlist.h \
+	C:/Qt/6.9.1/mingw_64/include/QtCore/qstringlistmodel.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/qstringliteral.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/qstringmatcher.h \
 	C:/Qt/6.9.1/mingw_64/include/QtCore/qstringtokenizer.h \
