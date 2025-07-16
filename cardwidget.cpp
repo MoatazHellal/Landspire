@@ -18,6 +18,8 @@ cardWidget::cardWidget(const QString& name, const Affinity affinity, const QStri
 
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(m_imageLabel);
+    layout->setContentsMargins(0, 0, 0, 0);       // 👈 remove margins
+    layout->setSpacing(0);
     setLayout(layout);
 
 }

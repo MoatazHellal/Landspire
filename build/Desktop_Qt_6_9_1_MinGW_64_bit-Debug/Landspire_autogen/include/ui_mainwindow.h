@@ -19,7 +19,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QVBoxLayout>
@@ -31,19 +31,17 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QHBoxLayout *horizontalLayout_6;
+    QGridLayout *gridLayout_2;
     QTabWidget *tabWidget;
     QWidget *tab;
     QHBoxLayout *horizontalLayout_2;
-    QGridLayout *gridLayout;
-    QListView *listView;
-    QSpacerItem *horizontalSpacer;
     QLabel *label;
-    QSpacerItem *horizontalSpacer_2;
+    QListView *listView;
     QWidget *tab_2;
     QHBoxLayout *horizontalLayout_4;
     QHBoxLayout *horizontalLayout_3;
-    QWidget *CardsGridContainer;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
     QGridLayout *gridLayout_3;
     QGridLayout *CardsGrid;
     QWidget *RightPane;
@@ -56,6 +54,8 @@ public:
     QLabel *CardDescription;
     QWidget *widget;
     QHBoxLayout *horizontalLayout_7;
+    QPushButton *ImportDeck;
+    QPushButton *ExportDeck;
     QLabel *CardCount;
     QPushButton *ClearDeck;
     QListView *DeckList;
@@ -82,37 +82,26 @@ public:
         MainWindow->setSizePolicy(sizePolicy);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        horizontalLayout_6 = new QHBoxLayout(centralwidget);
-        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        gridLayout_2 = new QGridLayout(centralwidget);
+        gridLayout_2->setObjectName("gridLayout_2");
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName("tabWidget");
         tab = new QWidget();
         tab->setObjectName("tab");
         horizontalLayout_2 = new QHBoxLayout(tab);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        gridLayout = new QGridLayout();
-        gridLayout->setObjectName("gridLayout");
-        listView = new QListView(tab);
-        listView->setObjectName("listView");
-
-        gridLayout->addWidget(listView, 0, 3, 1, 1);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer, 0, 1, 1, 1);
-
         label = new QLabel(tab);
         label->setObjectName("label");
 
-        gridLayout->addWidget(label, 0, 0, 1, 1);
+        horizontalLayout_2->addWidget(label);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        listView = new QListView(tab);
+        listView->setObjectName("listView");
 
-        gridLayout->addItem(horizontalSpacer_2, 0, 2, 1, 1);
+        horizontalLayout_2->addWidget(listView);
 
-
-        horizontalLayout_2->addLayout(gridLayout);
-
+        horizontalLayout_2->setStretch(0, 3);
+        horizontalLayout_2->setStretch(1, 2);
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName("tab_2");
@@ -120,17 +109,28 @@ public:
         horizontalLayout_4->setObjectName("horizontalLayout_4");
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        CardsGridContainer = new QWidget(tab_2);
-        CardsGridContainer->setObjectName("CardsGridContainer");
-        gridLayout_3 = new QGridLayout(CardsGridContainer);
+        scrollArea = new QScrollArea(tab_2);
+        scrollArea->setObjectName("scrollArea");
+        scrollArea->setSizeAdjustPolicy(QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents);
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 443, 468));
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(scrollAreaWidgetContents->sizePolicy().hasHeightForWidth());
+        scrollAreaWidgetContents->setSizePolicy(sizePolicy1);
+        gridLayout_3 = new QGridLayout(scrollAreaWidgetContents);
         gridLayout_3->setObjectName("gridLayout_3");
         CardsGrid = new QGridLayout();
         CardsGrid->setObjectName("CardsGrid");
 
         gridLayout_3->addLayout(CardsGrid, 0, 0, 1, 1);
 
+        scrollArea->setWidget(scrollAreaWidgetContents);
 
-        horizontalLayout_3->addWidget(CardsGridContainer);
+        horizontalLayout_3->addWidget(scrollArea);
 
         RightPane = new QWidget(tab_2);
         RightPane->setObjectName("RightPane");
@@ -161,6 +161,16 @@ public:
         widget->setMinimumSize(QSize(20, 20));
         horizontalLayout_7 = new QHBoxLayout(widget);
         horizontalLayout_7->setObjectName("horizontalLayout_7");
+        ImportDeck = new QPushButton(widget);
+        ImportDeck->setObjectName("ImportDeck");
+
+        horizontalLayout_7->addWidget(ImportDeck);
+
+        ExportDeck = new QPushButton(widget);
+        ExportDeck->setObjectName("ExportDeck");
+
+        horizontalLayout_7->addWidget(ExportDeck);
+
         CardCount = new QLabel(widget);
         CardCount->setObjectName("CardCount");
         CardCount->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
@@ -169,11 +179,11 @@ public:
 
         ClearDeck = new QPushButton(widget);
         ClearDeck->setObjectName("ClearDeck");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(ClearDeck->sizePolicy().hasHeightForWidth());
-        ClearDeck->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(ClearDeck->sizePolicy().hasHeightForWidth());
+        ClearDeck->setSizePolicy(sizePolicy2);
         QIcon icon(QIcon::fromTheme(QIcon::ThemeIcon::EditDelete));
         ClearDeck->setIcon(icon);
 
@@ -235,9 +245,11 @@ public:
 
         horizontalLayout_8->addWidget(listView_3);
 
+        horizontalLayout_8->setStretch(0, 3);
+        horizontalLayout_8->setStretch(1, 2);
         tabWidget->addTab(tab_3, QString());
 
-        horizontalLayout_6->addWidget(tabWidget);
+        gridLayout_2->addWidget(tabWidget, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -250,7 +262,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
         tabWidget_2->setCurrentIndex(0);
 
 
@@ -266,6 +278,8 @@ public:
         tabWidget_2->setTabText(tabWidget_2->indexOf(Image), QCoreApplication::translate("MainWindow", "Image", nullptr));
         CardDescription->setText(QString());
         tabWidget_2->setTabText(tabWidget_2->indexOf(Description), QCoreApplication::translate("MainWindow", "Description", nullptr));
+        ImportDeck->setText(QCoreApplication::translate("MainWindow", "Import Deck", nullptr));
+        ExportDeck->setText(QCoreApplication::translate("MainWindow", "Export Deck", nullptr));
         CardCount->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         ClearDeck->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Deck", nullptr));

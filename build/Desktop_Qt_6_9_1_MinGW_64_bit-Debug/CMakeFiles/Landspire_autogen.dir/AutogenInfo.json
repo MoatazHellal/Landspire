@@ -354,6 +354,12 @@
 			null
 		],
 		[
+			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/gamewindow.h",
+			"MU",
+			"EWIEGA46WW/moc_gamewindow.cpp",
+			null
+		],
+		[
 			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
@@ -453,6 +459,11 @@
 		],
 		[
 			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/connectdialogue.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/gamewindow.cpp",
 			"MU",
 			null
 		],

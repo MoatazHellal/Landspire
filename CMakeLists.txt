@@ -18,6 +18,7 @@ qt_add_executable(Landspire
     cardwidget.h cardwidget.cpp
     cardwidget.h
     resources.qrc
+    gamewindow.h gamewindow.cpp gamewindow.ui
 )
 
 qt_add_resources(RESOURCES resources.qrc)

@@ -105,6 +105,14 @@ build CMakeFiles/Landspire.dir/cardwidget.cpp.obj: CXX_COMPILER__Landspire_unsca
   OBJECT_DIR = CMakeFiles\Landspire.dir
   OBJECT_FILE_DIR = CMakeFiles\Landspire.dir
 
+build CMakeFiles/Landspire.dir/gamewindow.cpp.obj: CXX_COMPILER__Landspire_unscanned_Debug C$:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/gamewindow.cpp || cmake_object_order_depends_target_Landspire
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\Landspire.dir\gamewindow.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/Landspire_autogen/include -isystem C:/Qt/6.9.1/mingw_64/include/QtCore -isystem C:/Qt/6.9.1/mingw_64/include -isystem C:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.9.1/mingw_64/include/QtWidgets -isystem C:/Qt/6.9.1/mingw_64/include/QtGui -isystem C:/Qt/6.9.1/mingw_64/include/QtNetwork
+  OBJECT_DIR = CMakeFiles\Landspire.dir
+  OBJECT_FILE_DIR = CMakeFiles\Landspire.dir
+
 build CMakeFiles/Landspire.dir/qrc_resources.cpp.obj: CXX_COMPILER__Landspire_unscanned_Debug C$:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/qrc_resources.cpp || cmake_object_order_depends_target_Landspire
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
   DEP_FILE = CMakeFiles\Landspire.dir\qrc_resources.cpp.obj.d
@@ -121,7 +129,7 @@ build CMakeFiles/Landspire.dir/qrc_resources.cpp.obj: CXX_COMPILER__Landspire_un
 #############################################
 # Link the executable Landspire.exe
 
-build Landspire.exe: CXX_EXECUTABLE_LINKER__Landspire_Debug CMakeFiles/Landspire.dir/Landspire_autogen/mocs_compilation.cpp.obj CMakeFiles/Landspire.dir/main.cpp.obj CMakeFiles/Landspire.dir/mainwindow.cpp.obj CMakeFiles/Landspire.dir/connectdialogue.cpp.obj CMakeFiles/Landspire.dir/server.cpp.obj CMakeFiles/Landspire.dir/clientconnection.cpp.obj CMakeFiles/Landspire.dir/cardwidget.cpp.obj CMakeFiles/Landspire.dir/qrc_resources.cpp.obj | C$:/Qt/6.9.1/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.9.1/mingw_64/lib/libQt6Network.a C$:/Qt/6.9.1/mingw_64/lib/libQt6Gui.a C$:/Qt/6.9.1/mingw_64/lib/libQt6Core.a C$:/Qt/6.9.1/mingw_64/lib/libQt6EntryPoint.a || Landspire_autogen Landspire_autogen_timestamp_deps
+build Landspire.exe: CXX_EXECUTABLE_LINKER__Landspire_Debug CMakeFiles/Landspire.dir/Landspire_autogen/mocs_compilation.cpp.obj CMakeFiles/Landspire.dir/main.cpp.obj CMakeFiles/Landspire.dir/mainwindow.cpp.obj CMakeFiles/Landspire.dir/connectdialogue.cpp.obj CMakeFiles/Landspire.dir/server.cpp.obj CMakeFiles/Landspire.dir/clientconnection.cpp.obj CMakeFiles/Landspire.dir/cardwidget.cpp.obj CMakeFiles/Landspire.dir/gamewindow.cpp.obj CMakeFiles/Landspire.dir/qrc_resources.cpp.obj | C$:/Qt/6.9.1/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.9.1/mingw_64/lib/libQt6Network.a C$:/Qt/6.9.1/mingw_64/lib/libQt6Gui.a C$:/Qt/6.9.1/mingw_64/lib/libQt6Core.a C$:/Qt/6.9.1/mingw_64/lib/libQt6EntryPoint.a || Landspire_autogen Landspire_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.9.1/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.9.1/mingw_64/lib/libQt6Network.a  C:/Qt/6.9.1/mingw_64/lib/libQt6Gui.a  -ld3d11  -ldxgi  -ldxguid  -ld3d12  C:/Qt/6.9.1/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.9.1/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -208,7 +216,7 @@ build Landspire_autogen_timestamp_deps: phony
 #############################################
 # Utility command for Landspire_autogen
 
-build Landspire_autogen: phony CMakeFiles/Landspire_autogen Landspire_autogen/include/ui_mainwindow.h Landspire_autogen/timestamp Landspire_autogen/mocs_compilation.cpp Landspire_autogen_timestamp_deps
+build Landspire_autogen: phony CMakeFiles/Landspire_autogen Landspire_autogen/include/ui_mainwindow.h Landspire_autogen/include/ui_gamewindow.h Landspire_autogen/timestamp Landspire_autogen/mocs_compilation.cpp Landspire_autogen_timestamp_deps
 
 
 #############################################
@@ -234,7 +242,7 @@ build Landspire_autogen/timestamp Landspire_autogen/mocs_compilation.cpp | ${cma
 #############################################
 # Phony custom command for CMakeFiles\Landspire_autogen
 
-build CMakeFiles/Landspire_autogen Landspire_autogen/include/ui_mainwindow.h | ${cmake_ninja_workdir}CMakeFiles/Landspire_autogen ${cmake_ninja_workdir}Landspire_autogen/include/ui_mainwindow.h: phony Landspire_autogen/timestamp || Landspire_autogen_timestamp_deps
+build CMakeFiles/Landspire_autogen Landspire_autogen/include/ui_mainwindow.h Landspire_autogen/include/ui_gamewindow.h | ${cmake_ninja_workdir}CMakeFiles/Landspire_autogen ${cmake_ninja_workdir}Landspire_autogen/include/ui_mainwindow.h ${cmake_ninja_workdir}Landspire_autogen/include/ui_gamewindow.h: phony Landspire_autogen/timestamp || Landspire_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.

@@ -31,6 +31,9 @@ private slots:
     void about();
     void gameRules();
 
+    void onExportDeckClicked();
+    void onImportDeckClicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -43,6 +46,9 @@ private:
     void addCard(cardWidget* card);
     void clearDeck();
     void setCardPreview(cardWidget* card);
+
+    void exportDeck(const QString& path);
+    void importDeck(const QString& path);
 
     QMenu* landspireMenu;
     QMenu* helpMenu;

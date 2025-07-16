@@ -5,6 +5,8 @@
 #include "cardwidget.h"
 #include <qevent.h>
 #include <QMimeData>
+#include <QFile>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->DeckList->setModel(deckModel);
 
     QVector<cardWidget*> cards = createCardWidgets();
-    int maxCols = 6;
+    int maxCols = 4;
     int row = 0, col = 0;
     foreach (auto card, cards) {
         ui->CardsGrid->addWidget(card, row, col);
@@ -44,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     connect(ui->ClearDeck, &QPushButton::clicked, this, &MainWindow::clearDeck);
+    connect(ui->ExportDeck, &QPushButton::clicked, this, &MainWindow::onExportDeckClicked);
+    connect(ui->ImportDeck, &QPushButton::clicked, this, &MainWindow::onImportDeckClicked);
 }
 
 MainWindow::~MainWindow()
@@ -120,12 +124,16 @@ void MainWindow::serverDisconnect()
 
 void MainWindow::fullscreen()
 {
-
+    if (isFullScreen()) {
+        showNormal();
+    } else {
+        showFullScreen();
+    }
 }
 
 void MainWindow::exit()
 {
-
+    qApp->quit();
 }
 
 void MainWindow::about()
@@ -150,6 +158,28 @@ QVector<cardWidget*> MainWindow::createCardWidgets()
     cards.append(card2);
     cardWidget* card3 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
     cards.append(card3);
+    cardWidget* card4 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card4);
+    cardWidget* card5 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card5);
+    cardWidget* card6 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card6);
+    cardWidget* card7 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card7);
+    cardWidget* card8 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card8);
+    cardWidget* card9 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card9);
+    cardWidget* card10 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card10);
+    cardWidget* card11 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card11);
+    cardWidget* card12 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card12);
+    cardWidget* card13 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card13);
+    cardWidget* card14 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
+    cards.append(card14);
 
     return cards;
 }
@@ -174,6 +204,66 @@ void MainWindow::setCardPreview(cardWidget* card)
 {
             ui->CardPreview->setPixmap(QPixmap(":/cards/" + card->name().toLower().replace(" ", "_") + ".png").scaled(200, 280));
             ui->CardDescription->setText(card->description());
+}
+
+void MainWindow::onExportDeckClicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export Deck"), "", "Landspire Deck (*.lspdeck)");
+    if (!fileName.isEmpty()) {
+        exportDeck(fileName);
+    }
+}
+
+void MainWindow::onImportDeckClicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Load Deck"), "", "Landspire Deck (*.lspdeck)");
+    if (!fileName.isEmpty()) {
+        importDeck(fileName);
+    }
+}
+
+void MainWindow::exportDeck(const QString& path)
+{
+    QFile file(path);
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qWarning() << "Failed to open file for writing" << path;
+        return;
+    }
+
+    QTextStream out(&file);
+
+    const QStringList cards = deckModel->stringList();
+    for(const QString& card : cards)
+    {
+        out << card << "\n";
+    }
+
+    file.close();
+}
+
+void MainWindow::importDeck(const QString& path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning() << "Failed to open file for reading:" << path;
+        return;
+    }
+
+    QStringList cards;
+    QTextStream in(&file);
+
+    while(!in.atEnd())
+    {
+        QString line = in.readLine().trimmed();
+        if (!line.isEmpty())
+        {
+            cards << line;
+        }
+    }
+
+    file.close();
+    deckModel->setStringList(cards);
 }
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
