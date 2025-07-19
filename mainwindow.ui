@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1096</width>
+    <height>679</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -20,8 +20,8 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
+   <layout class="QHBoxLayout" name="horizontalLayout_5">
+    <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>1</number>
@@ -47,7 +47,7 @@
        <attribute name="title">
         <string>Deck</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="3,2">
           <item>
@@ -63,8 +63,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>443</width>
-               <height>468</height>
+               <width>620</width>
+               <height>547</height>
               </rect>
              </property>
              <property name="sizePolicy">
@@ -95,40 +95,29 @@
                   <attribute name="title">
                    <string>Image</string>
                   </attribute>
-                  <widget class="QLabel" name="CardPreview">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>272</width>
-                     <height>229</height>
-                    </rect>
-                   </property>
-                   <property name="text">
-                    <string/>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignmentFlag::AlignCenter</set>
-                   </property>
-                  </widget>
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                   <item>
+                    <widget class="QLabel" name="CardPreview">
+                     <property name="text">
+                      <string>TextLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                  <widget class="QWidget" name="Description">
                   <attribute name="title">
                    <string>Description</string>
                   </attribute>
-                  <widget class="QLabel" name="CardDescription">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>272</width>
-                     <height>229</height>
-                    </rect>
-                   </property>
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </widget>
+                  <layout class="QHBoxLayout" name="horizontalLayout_10">
+                   <item>
+                    <widget class="QLabel" name="CardDescription">
+                     <property name="text">
+                      <string>TextLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </widget>
                </item>
@@ -240,7 +229,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1096</width>
      <height>26</height>
     </rect>
    </property>

@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-b9a489e63cd588cee95d.json",
+					"jsonFile" : "directory-.-Debug-63b8bffbef3e7086d52d.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Landspire::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Landspire-Debug-741fc9d5682ef3299670.json",
+					"jsonFile" : "target-Landspire-Debug-076929431470eff6f689.json",
 					"name" : "Landspire",
 					"projectIndex" : 0
 				},

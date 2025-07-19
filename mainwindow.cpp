@@ -3,6 +3,7 @@
 
 #include "connectdialogue.h"
 #include "cardwidget.h"
+#include "cardfactory.h"
 #include <qevent.h>
 #include <QMimeData>
 #include <QFile>
@@ -18,10 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
     createActions();
     createMenus();
 
-    ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200,280));
+    ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200, 280, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     deckModel = new QStringListModel(this);
     ui->DeckList->setModel(deckModel);
+
+    CardFactory::loadCards(":/data/cards.json");
 
     QVector<cardWidget*> cards = createCardWidgets();
     int maxCols = 4;
@@ -148,39 +151,16 @@ void MainWindow::gameRules()
 
 QVector<cardWidget*> MainWindow::createCardWidgets()
 {
+    QStringList cardNames = {
+        "Clairvoyance", "Seek scriptures", "Detect evil and good",
+        "Protection from evil and good", "Augury", "Borrowed knowledge",
+    };
+
     QVector<cardWidget*> cards;
-
-    cardWidget* card = new cardWidget("Fire Village", Affinity::Fire, "Fire village", QPixmap(":/cards/card.png"));
-    cards.append(card);
-    cardWidget* card1 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card1);
-    cardWidget* card2 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card2);
-    cardWidget* card3 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card3);
-    cardWidget* card4 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card4);
-    cardWidget* card5 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card5);
-    cardWidget* card6 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card6);
-    cardWidget* card7 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card7);
-    cardWidget* card8 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card8);
-    cardWidget* card9 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card9);
-    cardWidget* card10 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card10);
-    cardWidget* card11 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card11);
-    cardWidget* card12 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card12);
-    cardWidget* card13 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card13);
-    cardWidget* card14 = new cardWidget("Fire Village", Affinity::Fire, "", QPixmap(":/cards/card.png"));
-    cards.append(card14);
-
+    for (const QString& name : cardNames) {
+        cardWidget* card = CardFactory::createCard(name);
+        if (card) cards.append(card);
+    }
     return cards;
 }
 

@@ -78,13 +78,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 36,
+				"line" : 38,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 27,
+				"line" : 29,
 				"parent" : 0
 			},
 			{
@@ -286,7 +286,7 @@
 			{
 				"command" : 11,
 				"file" : 1,
-				"line" : 25,
+				"line" : 27,
 				"parent" : 0
 			}
 		]
@@ -399,18 +399,18 @@
 				10,
 				13,
 				16,
-				18
+				19
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"id" : "Landspire_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "Landspire_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "Landspire_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "Landspire::@6890427a1f51a3e7e1df",
@@ -531,10 +531,10 @@
 			"sourceIndexes" : 
 			[
 				0,
-				18,
 				19,
 				20,
-				21
+				21,
+				22
 			]
 		},
 		{
@@ -579,10 +579,17 @@
 			]
 		},
 		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				18
+			]
+		},
+		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				22
+				23
 			]
 		}
 	],
@@ -688,6 +695,11 @@
 			"sourceGroupIndex" : 3
 		},
 		{
+			"backtrace" : 4,
+			"path" : "cards.json",
+			"sourceGroupIndex" : 5
+		},
+		{
 			"backtrace" : 44,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
@@ -716,7 +728,7 @@
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/Landspire_autogen/timestamp.rule",
-			"sourceGroupIndex" : 5
+			"sourceGroupIndex" : 6
 		}
 	],
 	"type" : "EXECUTABLE"

@@ -336,6 +336,12 @@
 			null
 		],
 		[
+			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardfactory.h",
+			"MU",
+			"EWIEGA46WW/moc_cardfactory.cpp",
+			null
+		],
+		[
 			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardwidget.h",
 			"MU",
 			"EWIEGA46WW/moc_cardwidget.cpp",
@@ -447,6 +453,11 @@
 	"SETTINGS_FILE" : "C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/Landspire_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardfactory.cpp",
+			"MU",
+			null
+		],
 		[
 			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardwidget.cpp",
 			"MU",

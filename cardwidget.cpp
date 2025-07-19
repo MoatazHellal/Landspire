@@ -10,7 +10,7 @@ cardWidget::cardWidget(const QString& name, const Affinity affinity, const QStri
 {
     setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
     setLineWidth(2);
-    setFixedSize(100, 140); // Size of the card
+    setFixedSize(100, 140);
 
     m_imageLabel = new QLabel(this);
     m_imageLabel->setPixmap(pixmap.scaled(100, 140, Qt::KeepAspectRatio, Qt::SmoothTransformation));
@@ -18,10 +18,16 @@ cardWidget::cardWidget(const QString& name, const Affinity affinity, const QStri
 
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(m_imageLabel);
-    layout->setContentsMargins(0, 0, 0, 0);       // 👈 remove margins
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     setLayout(layout);
 
+}
+
+void cardWidget::resize(const float width, const float height)
+{
+    setFixedSize(width, height);
+    m_imageLabel->setPixmap(m_imageLabel->pixmap().scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 QString cardWidget::name() const

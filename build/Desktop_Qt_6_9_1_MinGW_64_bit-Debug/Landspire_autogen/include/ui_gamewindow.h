@@ -11,28 +11,234 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QListView>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_GameWindow
 {
 public:
+    QWidget *centralwidget;
+    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *PhaseLayout;
+    QVBoxLayout *FieldLayout;
+    QWidget *OpponentMainField;
+    QWidget *ShowdownField;
+    QWidget *PlayerMainField;
+    QWidget *HandWidget;
+    QHBoxLayout *horizontalLayout_3;
+    QHBoxLayout *HandLayout;
+    QVBoxLayout *SideLayout;
+    QWidget *OpponentDeck;
+    QWidget *OpponentGraveyard;
+    QSpacerItem *verticalSpacer;
+    QWidget *PlayerGraveyard;
+    QWidget *PlayerDeck;
+    QVBoxLayout *verticalLayout;
+    QLabel *DeckSize;
+    QVBoxLayout *InfoLayout;
+    QTabWidget *CardPreview;
+    QWidget *Image;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *ImagePreview;
+    QWidget *Description;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *DescriptionPreview;
+    QListView *listView;
+    QMenuBar *menubar;
+    QStatusBar *statusbar;
 
-    void setupUi(QScrollArea *GameWindow)
+    void setupUi(QMainWindow *GameWindow)
     {
         if (GameWindow->objectName().isEmpty())
             GameWindow->setObjectName("GameWindow");
-        GameWindow->resize(708, 454);
+        GameWindow->resize(1022, 804);
+        centralwidget = new QWidget(GameWindow);
+        centralwidget->setObjectName("centralwidget");
+        horizontalLayout_2 = new QHBoxLayout(centralwidget);
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        PhaseLayout = new QVBoxLayout();
+        PhaseLayout->setObjectName("PhaseLayout");
+
+        horizontalLayout_2->addLayout(PhaseLayout);
+
+        FieldLayout = new QVBoxLayout();
+        FieldLayout->setObjectName("FieldLayout");
+        OpponentMainField = new QWidget(centralwidget);
+        OpponentMainField->setObjectName("OpponentMainField");
+        OpponentMainField->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"        border: 2px solid #555;\n"
+"        border-radius: 10px;\n"
+""));
+
+        FieldLayout->addWidget(OpponentMainField);
+
+        ShowdownField = new QWidget(centralwidget);
+        ShowdownField->setObjectName("ShowdownField");
+        ShowdownField->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"        border: 2px solid #555;\n"
+"        border-radius: 10px;\n"
+""));
+
+        FieldLayout->addWidget(ShowdownField);
+
+        PlayerMainField = new QWidget(centralwidget);
+        PlayerMainField->setObjectName("PlayerMainField");
+        PlayerMainField->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"        border: 2px solid #555;\n"
+"        border-radius: 10px;\n"
+""));
+
+        FieldLayout->addWidget(PlayerMainField);
+
+        HandWidget = new QWidget(centralwidget);
+        HandWidget->setObjectName("HandWidget");
+        HandWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"        border: 2px solid #555;\n"
+"        border-radius: 10px;"));
+        horizontalLayout_3 = new QHBoxLayout(HandWidget);
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        HandLayout = new QHBoxLayout();
+        HandLayout->setObjectName("HandLayout");
+
+        horizontalLayout_3->addLayout(HandLayout);
+
+
+        FieldLayout->addWidget(HandWidget);
+
+        FieldLayout->setStretch(0, 2);
+        FieldLayout->setStretch(1, 1);
+        FieldLayout->setStretch(2, 2);
+        FieldLayout->setStretch(3, 1);
+
+        horizontalLayout_2->addLayout(FieldLayout);
+
+        SideLayout = new QVBoxLayout();
+        SideLayout->setObjectName("SideLayout");
+        OpponentDeck = new QWidget(centralwidget);
+        OpponentDeck->setObjectName("OpponentDeck");
+        OpponentDeck->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"        border: 2px solid #555;\n"
+"        border-radius: 10px;"));
+
+        SideLayout->addWidget(OpponentDeck);
+
+        OpponentGraveyard = new QWidget(centralwidget);
+        OpponentGraveyard->setObjectName("OpponentGraveyard");
+        OpponentGraveyard->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"        border: 2px solid #555;\n"
+"        border-radius: 10px;"));
+
+        SideLayout->addWidget(OpponentGraveyard);
+
+        verticalSpacer = new QSpacerItem(20, 150, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
+
+        SideLayout->addItem(verticalSpacer);
+
+        PlayerGraveyard = new QWidget(centralwidget);
+        PlayerGraveyard->setObjectName("PlayerGraveyard");
+        PlayerGraveyard->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"        border: 2px solid #555;\n"
+"        border-radius: 10px;"));
+
+        SideLayout->addWidget(PlayerGraveyard);
+
+        PlayerDeck = new QWidget(centralwidget);
+        PlayerDeck->setObjectName("PlayerDeck");
+        PlayerDeck->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"        border: 2px solid #555;\n"
+"        border-radius: 10px;"));
+        verticalLayout = new QVBoxLayout(PlayerDeck);
+        verticalLayout->setObjectName("verticalLayout");
+        DeckSize = new QLabel(PlayerDeck);
+        DeckSize->setObjectName("DeckSize");
+        QFont font;
+        font.setBold(true);
+        DeckSize->setFont(font);
+        DeckSize->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout->addWidget(DeckSize);
+
+
+        SideLayout->addWidget(PlayerDeck);
+
+
+        horizontalLayout_2->addLayout(SideLayout);
+
+        InfoLayout = new QVBoxLayout();
+        InfoLayout->setObjectName("InfoLayout");
+        CardPreview = new QTabWidget(centralwidget);
+        CardPreview->setObjectName("CardPreview");
+        Image = new QWidget();
+        Image->setObjectName("Image");
+        verticalLayout_3 = new QVBoxLayout(Image);
+        verticalLayout_3->setObjectName("verticalLayout_3");
+        ImagePreview = new QLabel(Image);
+        ImagePreview->setObjectName("ImagePreview");
+
+        verticalLayout_3->addWidget(ImagePreview);
+
+        CardPreview->addTab(Image, QString());
+        Description = new QWidget();
+        Description->setObjectName("Description");
+        verticalLayout_2 = new QVBoxLayout(Description);
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        DescriptionPreview = new QLabel(Description);
+        DescriptionPreview->setObjectName("DescriptionPreview");
+        DescriptionPreview->setWordWrap(true);
+
+        verticalLayout_2->addWidget(DescriptionPreview);
+
+        CardPreview->addTab(Description, QString());
+
+        InfoLayout->addWidget(CardPreview);
+
+        listView = new QListView(centralwidget);
+        listView->setObjectName("listView");
+
+        InfoLayout->addWidget(listView);
+
+
+        horizontalLayout_2->addLayout(InfoLayout);
+
+        horizontalLayout_2->setStretch(0, 1);
+        horizontalLayout_2->setStretch(1, 10);
+        horizontalLayout_2->setStretch(2, 2);
+        horizontalLayout_2->setStretch(3, 4);
+        GameWindow->setCentralWidget(centralwidget);
+        menubar = new QMenuBar(GameWindow);
+        menubar->setObjectName("menubar");
+        menubar->setGeometry(QRect(0, 0, 1022, 26));
+        GameWindow->setMenuBar(menubar);
+        statusbar = new QStatusBar(GameWindow);
+        statusbar->setObjectName("statusbar");
+        GameWindow->setStatusBar(statusbar);
 
         retranslateUi(GameWindow);
+
+        CardPreview->setCurrentIndex(1);
+
 
         QMetaObject::connectSlotsByName(GameWindow);
     } // setupUi
 
-    void retranslateUi(QScrollArea *GameWindow)
+    void retranslateUi(QMainWindow *GameWindow)
     {
-        GameWindow->setWindowTitle(QCoreApplication::translate("GameWindow", "ScrollArea", nullptr));
+        GameWindow->setWindowTitle(QCoreApplication::translate("GameWindow", "MainWindow", nullptr));
+        DeckSize->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
+        ImagePreview->setText(QCoreApplication::translate("GameWindow", "TextLabel", nullptr));
+        CardPreview->setTabText(CardPreview->indexOf(Image), QCoreApplication::translate("GameWindow", "Image", nullptr));
+        DescriptionPreview->setText(QCoreApplication::translate("GameWindow", "TextLabel", nullptr));
+        CardPreview->setTabText(CardPreview->indexOf(Description), QCoreApplication::translate("GameWindow", "Description", nullptr));
     } // retranslateUi
 
 };

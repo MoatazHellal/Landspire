@@ -1,0 +1,123 @@
+[
+  {
+    "name": "Clairvoyance",
+    "description": "Both players reveal their hands",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Seek scriptures",
+    "description": "Search your deck for up to 2 Incantations...",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Detect evil and good",
+    "description": "Your opponent reveals all cards of Holy or Dark affinities in their hand",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Protection from evil and good",
+    "description": "You get no damage from sources of Holy or Dark affinities during Showdown Phase this round",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Augury",
+    "description": "Reveal the top 3 cards from your deck and put them back in the order of your choice",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Borrowed knowledge",
+    "description": "Draw 3 cards then discard 1 card",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Warding bubble",
+    "description": "You get no damage from sources of Fire and Water affinities during Showdown Phase this round",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Dust shield",
+    "description": "You get no damage from sources of Earth and Wind affinities during Showdown Phase this round",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Nature's boon",
+    "description": "You get no damage from sources of Earth, Wind and Water affinities but get double damage from sources of Fire affinity during Showdown Phase this round",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Wrath of the elements",
+    "description": "All your and your opponent's damage from sources of Fire, Water, Earth and Wind affinities have +2 to their original value during Showdown Phase",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Infuse life",
+    "description": "Gain 5 life points. Reveal a card with a Holy affinity from your hand to gain 3 more life points",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Whisper of hope",
+    "description": "Draw 1 card. Gain 2 life points",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Daring exploration",
+    "description": "Both players reveal their hands",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Reveal cards from the top of your deck until you reveal a Landmark. Add all revealed cards in your hand and take 2 damage for each non-Landmark card added this way.",
+    "description": "Both players reveal their hands",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Guided exploration",
+    "description": "Search your deck for a Landmark, reveal it and add it in your hand. Shuffle your deck",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Gift of prosperity",
+    "description": "Draw 2 cards",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Gift of choice",
+    "description": "Search your deck for a card, reveal it and add it to your hand. Shuffle your deck",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Gift of renewal",
+    "description": "Return a card from your graveyard to your hand",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Unearth scriptures",
+    "description": "Return up to 2 Incantations from your graveyard to your hand",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  },
+  {
+    "name": "Reclaim ruins",
+    "description": "Return up to 2 Landmarks from your graveyard to your hand",
+    "affinity": "incantation",
+    "image": ":/cards/card.png"
+  }
+
+]

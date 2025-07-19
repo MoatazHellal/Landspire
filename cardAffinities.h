@@ -7,7 +7,8 @@ enum class Affinity {
     Earth,
     Wind,
     Holy,
-    Dark
+    Dark,
+    incantation
 };
 
 #endif // CARDAFFINITIES_H

@@ -1,5 +1,6 @@
 C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/Landspire_autogen/EWIEGA46WW/moc_gamewindow.cpp: C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/gamewindow.h \
   C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/Landspire_autogen/moc_predefs.h \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
   C:/Qt/6.9.1/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/q20functional.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/q20iterator.h \
@@ -125,6 +126,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinG
   C:/Qt/6.9.1/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.1/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.9.1/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.1/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.1/mingw_64/include/QtGui/qbrush.h \
@@ -151,11 +153,12 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinG
   C:/Qt/6.9.1/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.9.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.1/mingw_64/include/QtGui/qwindowdefs_win.h \
-  C:/Qt/6.9.1/mingw_64/include/QtWidgets/QScrollArea \
-  C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+  C:/Qt/6.9.1/mingw_64/include/QtWidgets/QFrame \
+  C:/Qt/6.9.1/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
-  C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
+  C:/Qt/6.9.1/mingw_64/include/QtWidgets/qmainwindow.h \
   C:/Qt/6.9.1/mingw_64/include/QtWidgets/qsizepolicy.h \
+  C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtabwidget.h \
   C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgets-config.h \
   C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgetsexports.h \
   C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -370,4 +373,6 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinG
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sys/types.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
-  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
+  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
+  C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardAffinities.h \
+  C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardwidget.h

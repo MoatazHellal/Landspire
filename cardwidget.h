@@ -19,6 +19,8 @@ public:
     Affinity affinity() const;
     QLabel* imageLabel() const;
 
+    void resize(const float width, const float height);
+
 protected:
     void enterEvent(QEnterEvent* event) override;
     void leaveEvent(QEvent* event) override;
