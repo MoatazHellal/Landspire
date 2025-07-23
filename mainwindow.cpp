@@ -251,24 +251,33 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
     if (watched == ui->DeckList) {
         if (event->type() == QEvent::DragEnter || event->type() == QEvent::DragMove) {
             auto dragEvent = static_cast<QDragMoveEvent*>(event);
-            if (dragEvent->mimeData()->hasText()) {
+            //if (dragEvent->mimeData()->hasText()) {
+            if (dragEvent->mimeData()->hasFormat("application/x-card"))
                 dragEvent->acceptProposedAction();
                 return true;
             }
-        } else if (event->type() == QEvent::Drop) {
+        else if (event->type() == QEvent::Drop) {
             if (auto dropEvent = dynamic_cast<QDropEvent*>(event)) {
-                if (dropEvent->mimeData()->hasText()) {
-                    QString name = dropEvent->mimeData()->text();
+                //if (dropEvent->mimeData()->hasText()) {
+                if (dropEvent->mimeData()->hasFormat("application/x-card")){
+                    //QString name = dropEvent->mimeData()->text();
 
-                    QStringList deck = deckModel->stringList();
-                    deck << name;
-                    deckModel->setStringList(deck);
+                    QByteArray raw = dropEvent->mimeData()->data("application/x-card");
+                    quintptr ptrValue = raw.toULongLong();
+                    cardWidget* card = reinterpret_cast<cardWidget*>(ptrValue);
 
-                    dropEvent->acceptProposedAction();
-                    int cardCount = ui->CardCount->text().toInt();
-                    cardCount++;
-                    ui->CardCount->setText(QString::number(cardCount));
-                    return true;
+                    if (card) {
+                        QString name = card->name();
+
+                        QStringList deck = deckModel->stringList();
+                        deck << name;
+                        deckModel->setStringList(deck);
+
+                        dropEvent->acceptProposedAction();
+                        int cardCount = ui->CardCount->text().toInt();
+                        cardCount++;
+                        ui->CardCount->setText(QString::number(cardCount));
+                        return true;}
                 }
             }
         }

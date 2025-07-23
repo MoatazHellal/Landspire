@@ -3,5 +3,6 @@
 #include "EWIEGA46WW/moc_clientconnection.cpp"
 #include "EWIEGA46WW/moc_connectdialogue.cpp"
 #include "EWIEGA46WW/moc_gamewindow.cpp"
+#include "EWIEGA46WW/moc_inputdialog.cpp"
 #include "EWIEGA46WW/moc_mainwindow.cpp"
 #include "EWIEGA46WW/moc_server.cpp"

@@ -13,7 +13,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QSpacerItem>
@@ -34,10 +33,13 @@ public:
     QWidget *OpponentMainField;
     QWidget *ShowdownField;
     QWidget *PlayerMainField;
+    QHBoxLayout *horizontalLayout_4;
+    QHBoxLayout *PlayerMainFieldLayout;
     QWidget *HandWidget;
     QHBoxLayout *horizontalLayout_3;
     QHBoxLayout *HandLayout;
     QVBoxLayout *SideLayout;
+    QLabel *OpponentLP;
     QWidget *OpponentDeck;
     QWidget *OpponentGraveyard;
     QSpacerItem *verticalSpacer;
@@ -45,6 +47,7 @@ public:
     QWidget *PlayerDeck;
     QVBoxLayout *verticalLayout;
     QLabel *DeckSize;
+    QLabel *PlayerLP;
     QVBoxLayout *InfoLayout;
     QTabWidget *CardPreview;
     QWidget *Image;
@@ -53,7 +56,7 @@ public:
     QWidget *Description;
     QVBoxLayout *verticalLayout_2;
     QLabel *DescriptionPreview;
-    QListView *listView;
+    QLabel *LogPanel;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -97,6 +100,13 @@ public:
 "        border: 2px solid #555;\n"
 "        border-radius: 10px;\n"
 ""));
+        horizontalLayout_4 = new QHBoxLayout(PlayerMainField);
+        horizontalLayout_4->setObjectName("horizontalLayout_4");
+        PlayerMainFieldLayout = new QHBoxLayout();
+        PlayerMainFieldLayout->setObjectName("PlayerMainFieldLayout");
+
+        horizontalLayout_4->addLayout(PlayerMainFieldLayout);
+
 
         FieldLayout->addWidget(PlayerMainField);
 
@@ -124,6 +134,12 @@ public:
 
         SideLayout = new QVBoxLayout();
         SideLayout->setObjectName("SideLayout");
+        OpponentLP = new QLabel(centralwidget);
+        OpponentLP->setObjectName("OpponentLP");
+        OpponentLP->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        SideLayout->addWidget(OpponentLP);
+
         OpponentDeck = new QWidget(centralwidget);
         OpponentDeck->setObjectName("OpponentDeck");
         OpponentDeck->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
@@ -171,6 +187,17 @@ public:
 
         SideLayout->addWidget(PlayerDeck);
 
+        PlayerLP = new QLabel(centralwidget);
+        PlayerLP->setObjectName("PlayerLP");
+        PlayerLP->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        SideLayout->addWidget(PlayerLP);
+
+        SideLayout->setStretch(1, 1);
+        SideLayout->setStretch(2, 1);
+        SideLayout->setStretch(3, 1);
+        SideLayout->setStretch(4, 1);
+        SideLayout->setStretch(5, 1);
 
         horizontalLayout_2->addLayout(SideLayout);
 
@@ -202,11 +229,15 @@ public:
 
         InfoLayout->addWidget(CardPreview);
 
-        listView = new QListView(centralwidget);
-        listView->setObjectName("listView");
+        LogPanel = new QLabel(centralwidget);
+        LogPanel->setObjectName("LogPanel");
+        LogPanel->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
+        LogPanel->setWordWrap(true);
 
-        InfoLayout->addWidget(listView);
+        InfoLayout->addWidget(LogPanel);
 
+        InfoLayout->setStretch(0, 1);
+        InfoLayout->setStretch(1, 1);
 
         horizontalLayout_2->addLayout(InfoLayout);
 
@@ -234,11 +265,14 @@ public:
     void retranslateUi(QMainWindow *GameWindow)
     {
         GameWindow->setWindowTitle(QCoreApplication::translate("GameWindow", "MainWindow", nullptr));
+        OpponentLP->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
         DeckSize->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
-        ImagePreview->setText(QCoreApplication::translate("GameWindow", "TextLabel", nullptr));
+        PlayerLP->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
+        ImagePreview->setText(QString());
         CardPreview->setTabText(CardPreview->indexOf(Image), QCoreApplication::translate("GameWindow", "Image", nullptr));
-        DescriptionPreview->setText(QCoreApplication::translate("GameWindow", "TextLabel", nullptr));
+        DescriptionPreview->setText(QString());
         CardPreview->setTabText(CardPreview->indexOf(Description), QCoreApplication::translate("GameWindow", "Description", nullptr));
+        LogPanel->setText(QString());
     } // retranslateUi
 
 };

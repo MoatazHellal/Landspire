@@ -158,6 +158,7 @@ public:
         horizontalLayout_10->setObjectName("horizontalLayout_10");
         CardDescription = new QLabel(Description);
         CardDescription->setObjectName("CardDescription");
+        CardDescription->setWordWrap(true);
 
         horizontalLayout_10->addWidget(CardDescription);
 
@@ -272,7 +273,7 @@ public:
         retranslateUi(MainWindow);
 
         tabWidget->setCurrentIndex(1);
-        tabWidget_2->setCurrentIndex(0);
+        tabWidget_2->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

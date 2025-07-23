@@ -366,6 +366,12 @@
 			null
 		],
 		[
+			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/inputdialog.h",
+			"MU",
+			"EWIEGA46WW/moc_inputdialog.cpp",
+			null
+		],
+		[
 			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
@@ -475,6 +481,11 @@
 		],
 		[
 			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/gamewindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/inputdialog.cpp",
 			"MU",
 			null
 		],

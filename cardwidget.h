@@ -8,6 +8,11 @@
 
 class QLabel;
 
+enum class DragContext {
+    DeckEditor,
+    Game
+};
+
 class cardWidget : public QFrame
 {
     Q_OBJECT
@@ -18,6 +23,8 @@ public:
     QString description() const;
     Affinity affinity() const;
     QLabel* imageLabel() const;
+
+    void setDragContext(DragContext context) { m_dragContext = context; }
 
     void resize(const float width, const float height);
 
@@ -36,6 +43,8 @@ private:
     QString m_description;
     Affinity m_affinity;
     QLabel* m_imageLabel;
+
+    DragContext m_dragContext = DragContext::DeckEditor;
 };
 
 #endif // CARDWIDGET_H

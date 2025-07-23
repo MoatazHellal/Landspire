@@ -21,6 +21,7 @@ qt_add_executable(Landspire
     gamewindow.h gamewindow.cpp gamewindow.ui
     cards.json
     cardfactory.h cardfactory.cpp
+    inputdialog.h inputdialog.cpp
 
 )
 

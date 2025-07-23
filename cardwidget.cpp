@@ -62,14 +62,24 @@ void cardWidget::leaveEvent(QEvent* event)
 
 void cardWidget::mousePressEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton) {
+    /* if (event->button() == Qt::LeftButton) {
         auto mimeData = new QMimeData();
         mimeData->setText(m_name);
 
         auto drag = new QDrag(this);
-        drag->setMimeData(mimeData);
+        drag->setMimeData(mimeData);*/
 
-        drag->exec(Qt::CopyAction);
+    if (event->button() == Qt::LeftButton) {
+        QDrag* drag = new QDrag(this);
+        QMimeData* mime = new QMimeData;
+
+        mime->setData("application/x-card", QByteArray::number(reinterpret_cast<quintptr>(this)));
+
+        drag->setMimeData(mime);
+
+        Qt::DropAction action = (m_dragContext == DragContext::DeckEditor) ? Qt::CopyAction : Qt::MoveAction;
+
+        drag->exec(action);
     }
     else if (event->button() == Qt::RightButton)
     {
