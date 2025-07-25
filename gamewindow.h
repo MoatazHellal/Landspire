@@ -42,6 +42,7 @@ private:
     void setCardPreview(cardWidget* card);
     void takeCardFromDeck(QLayout* destination);
     void updateDeckSize();
+    void updateGraveyardSize();
 
     void mousePressEvent(QMouseEvent* event) override;
 
@@ -52,6 +53,7 @@ private:
     QMenu* gameMenu;
 
     QVector<cardWidget*> PlayerDeck;
+    QVector<cardWidget*> PlayerGraveyard;
 };
 
 #endif // GAMEWINDOW_H

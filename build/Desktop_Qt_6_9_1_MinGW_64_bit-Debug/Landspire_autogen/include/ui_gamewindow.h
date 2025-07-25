@@ -44,6 +44,8 @@ public:
     QWidget *OpponentGraveyard;
     QSpacerItem *verticalSpacer;
     QWidget *PlayerGraveyard;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *GraveyardSize;
     QWidget *PlayerDeck;
     QVBoxLayout *verticalLayout;
     QLabel *DeckSize;
@@ -165,6 +167,17 @@ public:
         PlayerGraveyard->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "        border: 2px solid #555;\n"
 "        border-radius: 10px;"));
+        verticalLayout_4 = new QVBoxLayout(PlayerGraveyard);
+        verticalLayout_4->setObjectName("verticalLayout_4");
+        GraveyardSize = new QLabel(PlayerGraveyard);
+        GraveyardSize->setObjectName("GraveyardSize");
+        QFont font;
+        font.setBold(true);
+        GraveyardSize->setFont(font);
+        GraveyardSize->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_4->addWidget(GraveyardSize);
+
 
         SideLayout->addWidget(PlayerGraveyard);
 
@@ -177,8 +190,6 @@ public:
         verticalLayout->setObjectName("verticalLayout");
         DeckSize = new QLabel(PlayerDeck);
         DeckSize->setObjectName("DeckSize");
-        QFont font;
-        font.setBold(true);
         DeckSize->setFont(font);
         DeckSize->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
@@ -266,6 +277,7 @@ public:
     {
         GameWindow->setWindowTitle(QCoreApplication::translate("GameWindow", "MainWindow", nullptr));
         OpponentLP->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
+        GraveyardSize->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
         DeckSize->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
         PlayerLP->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
         ImagePreview->setText(QString());

@@ -26,10 +26,12 @@ GameWindow::GameWindow(QWidget *parent)
     connect(ui->PlayerDeck, &QWidget::customContextMenuRequested, this, &GameWindow::onDeckContextMenuRequested);
 
     ui->PlayerDeck->installEventFilter(this);
+    ui->PlayerGraveyard->installEventFilter(this);
     ui->HandWidget->installEventFilter(this);
     ui->PlayerMainField->installEventFilter(this);
 
     ui->PlayerDeck->setAcceptDrops(true);
+    ui->PlayerGraveyard->setAcceptDrops(true);
     ui->HandWidget->setAcceptDrops(true);
     ui->PlayerMainField->setAcceptDrops(true);
 
@@ -115,15 +117,20 @@ void GameWindow::onDeckLoaded()
 }
 
 void GameWindow::setLP() {
+    int previousLP = ui->PlayerLP->text().toInt();
+    int newLP;
     InputDialog dialog("Enter new LP:", this);
     if (dialog.exec() == QDialog::Accepted) {
         QString input = dialog.getInputText();
         bool ok;
-        int lp = input.toInt(&ok);
+        newLP = input.toInt(&ok);
         if (ok) {
-            ui->PlayerLP->setText(QString::number(lp));
+            ui->PlayerLP->setText(QString::number(newLP));
         }
     }
+    int diff = newLP - previousLP;
+    QString diffStr = (diff >= 0 ? "+" : "") + QString::number(diff);
+    log("Your LP was set to " + QString::number(newLP) + " (" + diffStr + ")");
 }
 
 void GameWindow::takeCardFromDeck(QLayout* destination)
@@ -139,19 +146,22 @@ void GameWindow::takeCardFromDeck(QLayout* destination)
 
 void GameWindow::drawCards() {
     InputDialog dialog("How many cards to draw?", this);
+    int count;
     if (dialog.exec() == QDialog::Accepted) {
         bool ok;
-        int count = dialog.getInputText().toInt(&ok);
+        count = dialog.getInputText().toInt(&ok);
         if (ok && count > 0) {
             for (int i = 0; i < count; ++i)
                 drawCard();
         }
     }
+    log("You drew" + QString::number(count) + "cards");
 }
 
 void GameWindow::drawCard()
 {
     takeCardFromDeck(ui->HandLayout);
+    log("You drew 1 card");
 }
 
 void GameWindow::revealTopCard()
@@ -165,6 +175,8 @@ void GameWindow::shuffleDeck()
     std::mt19937 g(rd());
 
     std::shuffle(PlayerDeck.begin(), PlayerDeck.end(), g);
+
+    log("You shuffled your deck");
 }
 
 void GameWindow::rollDice() {
@@ -202,20 +214,22 @@ void GameWindow::setCardPreview(cardWidget* card)
 
 void GameWindow::updateDeckSize()
 {
-    if(PlayerDeck.size() != 0)
-        ui->DeckSize->setText(QString::number(PlayerDeck.size()));
-    else {
-        ui->DeckSize->setText(QString::number(PlayerDeck.size()));
-    }
+    ui->DeckSize->setText(QString::number(PlayerDeck.size()));
+}
+
+void GameWindow::updateGraveyardSize()
+{
+    ui->GraveyardSize->setText(QString::number(PlayerGraveyard.size()));
 }
 
 void GameWindow::mousePressEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton &&
-        ui->PlayerDeck->geometry().contains(event->pos())) {
+    if (event->button() == Qt::LeftButton){
         QDrag* drag = new QDrag(this);
         QMimeData* mime = new QMimeData;
-        mime->setData("application/x-deckaction", "deckdrag");
+
+        if (ui->PlayerDeck->geometry().contains(event->pos()))
+            mime->setData("application/x-deckaction", "deckdrag");
 
         drag->setMimeData(mime);
         drag->exec(Qt::MoveAction);
@@ -229,7 +243,7 @@ bool GameWindow::eventFilter(QObject* watched, QEvent* event)
     if (event->type() == QEvent::DragEnter || event->type() == QEvent::DragMove) {
         auto dragEvent = static_cast<QDragMoveEvent*>(event);
         if (dragEvent->mimeData()->hasFormat("application/x-card") ||
-            dragEvent->mimeData()->hasFormat("application/x-deckaction")) {
+            dragEvent->mimeData()->hasFormat("application/x-deckaction")){
             dragEvent->acceptProposedAction();
             return true;
         }
@@ -249,7 +263,15 @@ bool GameWindow::eventFilter(QObject* watched, QEvent* event)
                 }
                 PlayerDeck.prepend(card);
                 updateDeckSize();
-            } else if (watched == ui->PlayerMainField) {
+            }else if (watched == ui->PlayerGraveyard){
+                if (QLayout* parentLayout = card->parentWidget()->layout()) {
+                    parentLayout->removeWidget(card);
+                    card->setParent(nullptr);
+                }
+                PlayerGraveyard.prepend(card);
+                updateGraveyardSize();
+            }
+            else if (watched == ui->PlayerMainField) {
                 ui->PlayerMainFieldLayout->addWidget(card);
             } else if (watched == ui->HandWidget) {
                 ui->HandLayout->addWidget(card);
