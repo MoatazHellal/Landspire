@@ -21,7 +21,7 @@
     "name": "Protection from evil and good",
     "description": "You get no damage from sources of Holy or Dark affinities during Showdown Phase this round",
     "affinity": "incantation",
-    "image": ":/cards/card.png"
+    "image": ":/cards/protection_from_evil_and_good.png"
   },
   {
     "name": "Augury",
@@ -73,21 +73,15 @@
   },
   {
     "name": "Daring exploration",
-    "description": "Both players reveal their hands",
+    "description": "Reveal cards from the top of your deck until you reveal a Landmark. Add all revealed cards in your hand and take 2 damage for each non-Landmark card added this way.",
     "affinity": "incantation",
-    "image": ":/cards/card.png"
-  },
-  {
-    "name": "Reveal cards from the top of your deck until you reveal a Landmark. Add all revealed cards in your hand and take 2 damage for each non-Landmark card added this way.",
-    "description": "Both players reveal their hands",
-    "affinity": "incantation",
-    "image": ":/cards/card.png"
+    "image": ":/cards/daring_exploration.png"
   },
   {
     "name": "Guided exploration",
     "description": "Search your deck for a Landmark, reveal it and add it in your hand. Shuffle your deck",
     "affinity": "incantation",
-    "image": ":/cards/card.png"
+    "image": ":/cards/guided_exploration.png"
   },
   {
     "name": "Gift of prosperity",

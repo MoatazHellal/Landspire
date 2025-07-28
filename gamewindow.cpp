@@ -4,6 +4,7 @@
 #include "cardfactory.h"
 #include <qevent.h>
 #include "inputdialog.h"
+#include "cardcollectionviewer.h"
 
 #include <QLabel>
 #include <QFileDialog>
@@ -24,6 +25,8 @@ GameWindow::GameWindow(QWidget *parent)
 
     ui->PlayerDeck->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->PlayerDeck, &QWidget::customContextMenuRequested, this, &GameWindow::onDeckContextMenuRequested);
+    ui->PlayerGraveyard->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->PlayerGraveyard, &QWidget::customContextMenuRequested, this, &GameWindow::onGraveyardContextMenuRequested);
 
     ui->PlayerDeck->installEventFilter(this);
     ui->PlayerGraveyard->installEventFilter(this);
@@ -164,6 +167,25 @@ void GameWindow::drawCard()
     log("You drew 1 card");
 }
 
+void GameWindow::viewDeck()
+{
+    CardCollectionViewer* viewer = new CardCollectionViewer(PlayerDeck, "Deck", this);
+    foreach (auto cardPreview, viewer->cardPreviews()) {
+        connect(cardPreview, &cardWidget::hovered, this, &GameWindow::setCardPreview);
+    }
+    viewer->setAttribute(Qt::WA_DeleteOnClose);
+    viewer->show();
+    log("You're viewing your deck");
+}
+
+void GameWindow::viewGraveyard()
+{
+    CardCollectionViewer* viewer = new CardCollectionViewer(PlayerGraveyard, "Graveyard", this);
+    viewer->setAttribute(Qt::WA_DeleteOnClose);
+    viewer->show();
+    log("You're viewing your Graveyard");
+}
+
 void GameWindow::revealTopCard()
 {
     takeCardFromDeck(ui->PlayerMainFieldLayout);
@@ -197,11 +219,24 @@ void GameWindow::onDeckContextMenuRequested(const QPoint &pos)
     QAction* drawCardAct = contextMenu.addAction("Draw card");
     QAction* drawCardsAct = contextMenu.addAction("Draw cards");
     contextMenu.addSeparator();
+    QAction* viewDeckAct = contextMenu.addAction("View deck");
+    contextMenu.addSeparator();
     QAction* shuffleAct = contextMenu.addAction("Shuffle deck");
 
     connect(drawCardAct, &QAction::triggered, this, &GameWindow::drawCard);
     connect(drawCardsAct, &QAction::triggered, this, &GameWindow::drawCards);
+    connect(viewDeckAct, &QAction::triggered, this, &GameWindow::viewDeck);
     connect(shuffleAct, &QAction::triggered, this, &GameWindow::shuffleDeck);
+
+    contextMenu.exec(ui->PlayerDeck->mapToGlobal(pos));
+}
+
+void GameWindow::onGraveyardContextMenuRequested(const QPoint &pos)
+{
+    QMenu contextMenu(this);
+    QAction* viewGraveAct = contextMenu.addAction("View graveyard");
+
+    connect(viewGraveAct, &QAction::triggered, this, &GameWindow::viewGraveyard);
 
     contextMenu.exec(ui->PlayerDeck->mapToGlobal(pos));
 }
@@ -272,8 +307,24 @@ bool GameWindow::eventFilter(QObject* watched, QEvent* event)
                 updateGraveyardSize();
             }
             else if (watched == ui->PlayerMainField) {
+                if(card->original())
+                {
+                    card->setParent(nullptr);
+                    card = card->original();
+                }
+                PlayerDeck.removeOne(card);
+                updateDeckSize();
+                card->resize(50,70);
                 ui->PlayerMainFieldLayout->addWidget(card);
             } else if (watched == ui->HandWidget) {
+                if(card->original())
+                {
+                    card->setParent(nullptr);
+                    card = card->original();
+                }
+                PlayerDeck.removeOne(card);
+                updateDeckSize();
+                card->resize(50,70);
                 ui->HandLayout->addWidget(card);
             }
             }

@@ -23,6 +23,10 @@ public:
     QString description() const;
     Affinity affinity() const;
     QLabel* imageLabel() const;
+    cardWidget* original() const;
+    void setOriginal(cardWidget* card);
+
+    cardWidget* clone(QWidget* newParent);
 
     void setDragContext(DragContext context) { m_dragContext = context; }
 
@@ -39,6 +43,7 @@ signals:
     void rightClicked(cardWidget* card);
 
 private:
+    cardWidget* m_original = nullptr;
     QString m_name;
     QString m_description;
     Affinity m_affinity;

@@ -25,8 +25,11 @@ private slots:
     void rollDice();
 
     void onDeckContextMenuRequested(const QPoint &pos);
+    void onGraveyardContextMenuRequested(const QPoint &pos);
     void drawCards();
     void drawCard();
+    void viewDeck();
+    void viewGraveyard();
     void revealTopCard();
     void shuffleDeck();
 

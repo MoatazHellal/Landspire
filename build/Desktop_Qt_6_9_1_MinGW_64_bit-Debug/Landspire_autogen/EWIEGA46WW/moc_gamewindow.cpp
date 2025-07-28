@@ -45,8 +45,11 @@ template <> constexpr inline auto GameWindow::qt_create_metaobjectdata<qt_meta_t
         "rollDice",
         "onDeckContextMenuRequested",
         "pos",
+        "onGraveyardContextMenuRequested",
         "drawCards",
         "drawCard",
+        "viewDeck",
+        "viewGraveyard",
         "revealTopCard",
         "shuffleDeck"
     };
@@ -62,14 +65,22 @@ template <> constexpr inline auto GameWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void(const QPoint &)>(5, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { QMetaType::QPoint, 6 },
         }}),
+        // Slot 'onGraveyardContextMenuRequested'
+        QtMocHelpers::SlotData<void(const QPoint &)>(7, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QPoint, 6 },
+        }}),
         // Slot 'drawCards'
-        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'drawCard'
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'revealTopCard'
+        // Slot 'drawCard'
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'shuffleDeck'
+        // Slot 'viewDeck'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'viewGraveyard'
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'revealTopCard'
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'shuffleDeck'
+        QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -97,10 +108,13 @@ void GameWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->setLP(); break;
         case 2: _t->rollDice(); break;
         case 3: _t->onDeckContextMenuRequested((*reinterpret_cast< std::add_pointer_t<QPoint>>(_a[1]))); break;
-        case 4: _t->drawCards(); break;
-        case 5: _t->drawCard(); break;
-        case 6: _t->revealTopCard(); break;
-        case 7: _t->shuffleDeck(); break;
+        case 4: _t->onGraveyardContextMenuRequested((*reinterpret_cast< std::add_pointer_t<QPoint>>(_a[1]))); break;
+        case 5: _t->drawCards(); break;
+        case 6: _t->drawCard(); break;
+        case 7: _t->viewDeck(); break;
+        case 8: _t->viewGraveyard(); break;
+        case 9: _t->revealTopCard(); break;
+        case 10: _t->shuffleDeck(); break;
         default: ;
         }
     }
@@ -125,14 +139,14 @@ int GameWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 11;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 11)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        _id -= 11;
     }
     return _id;
 }

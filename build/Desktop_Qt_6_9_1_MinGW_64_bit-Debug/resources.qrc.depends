@@ -1,6 +1,9 @@
 <RCC>
     <qresource prefix="/cards">
         <file>card.png</file>
+        <file>daring_exploration.png</file>
+        <file>guided_exploration.png</file>
+        <file>protection_from_evil_and_good.png</file>
     </qresource>
     <qresource prefix="/data">
         <file>cards.json</file>

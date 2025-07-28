@@ -15,11 +15,14 @@ cardWidget::cardWidget(const QString& name, const Affinity affinity, const QStri
     m_imageLabel = new QLabel(this);
     m_imageLabel->setPixmap(pixmap.scaled(100, 140, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     m_imageLabel->setAlignment(Qt::AlignCenter);
+    m_imageLabel->setScaledContents(true);
 
     QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addWidget(m_imageLabel);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
+    layout->addWidget(m_imageLabel);
+
+
     setLayout(layout);
 
 }
@@ -49,6 +52,24 @@ QLabel* cardWidget::imageLabel() const
 {
     return m_imageLabel;
 }
+
+cardWidget* cardWidget::original() const
+{
+    return m_original;
+}
+
+void cardWidget::setOriginal(cardWidget* card)
+{
+    m_original = card;
+}
+
+cardWidget* cardWidget::clone(QWidget* newParent)
+{
+    cardWidget* copy = new cardWidget(m_name, m_affinity, m_description, m_imageLabel->pixmap(), newParent);
+    copy->setOriginal(this);
+    return copy;
+}
+
 void cardWidget::enterEvent(QEnterEvent* event)
 {
     emit hovered(this);
@@ -62,12 +83,6 @@ void cardWidget::leaveEvent(QEvent* event)
 
 void cardWidget::mousePressEvent(QMouseEvent* event)
 {
-    /* if (event->button() == Qt::LeftButton) {
-        auto mimeData = new QMimeData();
-        mimeData->setText(m_name);
-
-        auto drag = new QDrag(this);
-        drag->setMimeData(mimeData);*/
 
     if (event->button() == Qt::LeftButton) {
         QDrag* drag = new QDrag(this);

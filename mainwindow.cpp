@@ -153,7 +153,7 @@ QVector<cardWidget*> MainWindow::createCardWidgets()
 {
     QStringList cardNames = {
         "Clairvoyance", "Seek scriptures", "Detect evil and good",
-        "Protection from evil and good", "Augury", "Borrowed knowledge",
+        "Protection from evil and good", "Augury", "Borrowed knowledge", "Daring exploration", "Guided exploration"
     };
 
     QVector<cardWidget*> cards;

@@ -22,6 +22,7 @@ qt_add_executable(Landspire
     cards.json
     cardfactory.h cardfactory.cpp
     inputdialog.h inputdialog.cpp
+    cardcollectionviewer.h cardcollectionviewer.cpp
 
 )
 
