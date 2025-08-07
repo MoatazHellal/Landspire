@@ -120,7 +120,7 @@ void GameWindow::onDeckLoaded()
 }
 
 void GameWindow::setLP() {
-    int previousLP = ui->PlayerLP->text().toInt();
+    int previousLP = ui->PlayerLP->text().split(": ").last().toInt();
     int newLP;
     InputDialog dialog("Enter new LP:", this);
     if (dialog.exec() == QDialog::Accepted) {
@@ -128,7 +128,7 @@ void GameWindow::setLP() {
         bool ok;
         newLP = input.toInt(&ok);
         if (ok) {
-            ui->PlayerLP->setText(QString::number(newLP));
+            ui->PlayerLP->setText("LP : " + QString::number(newLP));
         }
     }
     int diff = newLP - previousLP;
@@ -181,6 +181,9 @@ void GameWindow::viewDeck()
 void GameWindow::viewGraveyard()
 {
     CardCollectionViewer* viewer = new CardCollectionViewer(PlayerGraveyard, "Graveyard", this);
+    foreach (auto cardPreview, viewer->cardPreviews()) {
+        connect(cardPreview, &cardWidget::hovered, this, &GameWindow::setCardPreview);
+    }
     viewer->setAttribute(Qt::WA_DeleteOnClose);
     viewer->show();
     log("You're viewing your Graveyard");
@@ -189,6 +192,17 @@ void GameWindow::viewGraveyard()
 void GameWindow::revealTopCard()
 {
     takeCardFromDeck(ui->PlayerMainFieldLayout);
+}
+
+void GameWindow::millTopCard()
+{
+    if (!PlayerDeck.isEmpty())
+    {
+        auto card = PlayerDeck.takeFirst();
+        PlayerGraveyard.prepend(card);
+        updateDeckSize();
+        updateGraveyardSize();
+    }
 }
 
 void GameWindow::shuffleDeck()
@@ -238,7 +252,7 @@ void GameWindow::onGraveyardContextMenuRequested(const QPoint &pos)
 
     connect(viewGraveAct, &QAction::triggered, this, &GameWindow::viewGraveyard);
 
-    contextMenu.exec(ui->PlayerDeck->mapToGlobal(pos));
+    contextMenu.exec(ui->PlayerGraveyard->mapToGlobal(pos));
 }
 
 void GameWindow::setCardPreview(cardWidget* card)
@@ -259,6 +273,24 @@ void GameWindow::updateGraveyardSize()
 
 void GameWindow::mousePressEvent(QMouseEvent* event)
 {
+    QPoint globalPos = mapToGlobal(event->pos());
+    QPoint labelPos = ui->PlayerLP->mapFromGlobal(globalPos);
+
+    if (ui->PlayerLP->rect().contains(labelPos))
+    {
+        int lp = ui->PlayerLP->text().split(": ").last().toInt();
+        if (event->button() == Qt::LeftButton)
+        {
+            lp++;
+            log("Your LP was set to " + QString::number(lp) + " (+1)");
+        }
+        else if (event->button() == Qt::RightButton)
+        {
+            lp--;
+            log("Your LP was set to " + QString::number(lp) + " (-1)");
+        }
+        ui->PlayerLP->setText("LP : " + QString::number(lp));
+    }
     if (event->button() == Qt::LeftButton){
         QDrag* drag = new QDrag(this);
         QMimeData* mime = new QMimeData;
@@ -313,7 +345,9 @@ bool GameWindow::eventFilter(QObject* watched, QEvent* event)
                     card = card->original();
                 }
                 PlayerDeck.removeOne(card);
+                PlayerGraveyard.removeOne(card);
                 updateDeckSize();
+                updateGraveyardSize();
                 card->resize(50,70);
                 ui->PlayerMainFieldLayout->addWidget(card);
             } else if (watched == ui->HandWidget) {
@@ -323,7 +357,9 @@ bool GameWindow::eventFilter(QObject* watched, QEvent* event)
                     card = card->original();
                 }
                 PlayerDeck.removeOne(card);
+                PlayerGraveyard.removeOne(card);
                 updateDeckSize();
+                updateGraveyardSize();
                 card->resize(50,70);
                 ui->HandLayout->addWidget(card);
             }
@@ -337,6 +373,8 @@ bool GameWindow::eventFilter(QObject* watched, QEvent* event)
                 drawCard();
             } else if (watched == ui->PlayerMainField) {
                 revealTopCard();
+            }else if (watched == ui->PlayerGraveyard) {
+                millTopCard();
             }
 
             dropEvent->acceptProposedAction();

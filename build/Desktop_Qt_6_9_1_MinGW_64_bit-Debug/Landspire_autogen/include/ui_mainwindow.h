@@ -273,7 +273,7 @@ public:
         retranslateUi(MainWindow);
 
         tabWidget->setCurrentIndex(1);
-        tabWidget_2->setCurrentIndex(1);
+        tabWidget_2->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -282,11 +282,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        label->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Home", nullptr));
-        CardPreview->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        CardPreview->setText(QString());
         tabWidget_2->setTabText(tabWidget_2->indexOf(Image), QCoreApplication::translate("MainWindow", "Image", nullptr));
-        CardDescription->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        CardDescription->setText(QString());
         tabWidget_2->setTabText(tabWidget_2->indexOf(Description), QCoreApplication::translate("MainWindow", "Description", nullptr));
         ImportDeck->setText(QCoreApplication::translate("MainWindow", "Import Deck", nullptr));
         ExportDeck->setText(QCoreApplication::translate("MainWindow", "Export Deck", nullptr));

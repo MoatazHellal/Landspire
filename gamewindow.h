@@ -31,6 +31,7 @@ private slots:
     void viewDeck();
     void viewGraveyard();
     void revealTopCard();
+    void millTopCard();
     void shuffleDeck();
 
 private:

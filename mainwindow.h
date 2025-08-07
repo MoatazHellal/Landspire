@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QStringListModel>
 #include "cardwidget.h"
+#include "firebaseapi.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -61,5 +62,7 @@ private:
     QAction* gameRulesAct;
 
     QStringListModel* deckModel;
+
+    FirebaseAPI* firebase;
 };
 #endif // MAINWINDOW_H

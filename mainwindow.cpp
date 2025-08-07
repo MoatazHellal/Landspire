@@ -1,9 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include "connectdialogue.h"
 #include "cardwidget.h"
 #include "cardfactory.h"
+
+
 #include <qevent.h>
 #include <QMimeData>
 #include <QFile>
@@ -104,17 +105,29 @@ void MainWindow::createMenus()
 void MainWindow::serverConnect()
 {
     connectDialogue* Dialog = new connectDialogue(this);
+    firebase = new FirebaseAPI(this);
+    firebase->setDatabaseUrl("https://landspire-57cac-default-rtdb.europe-west1.firebasedatabase.app/");
 
     connect(Dialog, &connectDialogue::loginRequested, this, [this, Dialog](const QString& user, const QString& pass){
-        // TODO: Add login code here
-        qDebug() << "Login requested: " << user << pass;
-        Dialog->accept();
+        connect(firebase, &FirebaseAPI::loginSuccess, this, [this, Dialog]() {
+            qDebug() << "Login success!";
+            Dialog->accept();
+        });
+        connect(firebase, &FirebaseAPI::loginFailed, this, [Dialog](const QString& reason) {
+            qDebug() << "Login failed:" << reason;
+        });
+        firebase->loginUser(user, pass);
     });
 
     connect(Dialog, &connectDialogue::registerRequested, this, [this, Dialog](const QString& user, const QString& pass){
-        // TODO: Add registration code here
-        qDebug() << "Register requested: " << user << pass;
-        Dialog->accept();
+        connect(firebase, &FirebaseAPI::registerSuccess, this, [this, Dialog]() {
+            qDebug() << "Register success!";
+            Dialog->accept();
+        });
+        connect(firebase, &FirebaseAPI::registerFailed, this, [Dialog](const QString& reason) {
+            qDebug() << "Register failed:" << reason;
+        });
+        firebase->registerUser(user, pass);
     });
 
     Dialog->exec();

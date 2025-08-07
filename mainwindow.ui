@@ -34,7 +34,7 @@
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -89,7 +89,7 @@
                <item>
                 <widget class="QTabWidget" name="tabWidget_2">
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="Image">
                   <attribute name="title">
@@ -99,7 +99,7 @@
                    <item>
                     <widget class="QLabel" name="CardPreview">
                      <property name="text">
-                      <string>TextLabel</string>
+                      <string/>
                      </property>
                     </widget>
                    </item>
@@ -113,7 +113,7 @@
                    <item>
                     <widget class="QLabel" name="CardDescription">
                      <property name="text">
-                      <string>TextLabel</string>
+                      <string/>
                      </property>
                      <property name="wordWrap">
                       <bool>true</bool>

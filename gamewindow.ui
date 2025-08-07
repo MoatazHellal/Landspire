@@ -33,19 +33,21 @@
       <item>
        <widget class="QWidget" name="ShowdownField" native="true">
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
+         <string notr="true">	#ShowdownField{	
+background-color: rgb(255, 255, 255);
         border: 2px solid #555;
         border-radius: 10px;
-</string>
+}</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QWidget" name="PlayerMainField" native="true">
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
+         <string notr="true">#PlayerMainField{	
+		background-color: rgb(255, 255, 255);
         border: 2px solid #555;
-        border-radius: 10px;
+        border-radius: 10px;}
 </string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -58,9 +60,10 @@
       <item>
        <widget class="QWidget" name="HandWidget" native="true">
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
+         <string notr="true">#HandWidget{
+		background-color: rgb(255, 255, 255);
         border: 2px solid #555;
-        border-radius: 10px;</string>
+        border-radius: 10px;}</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
@@ -76,7 +79,7 @@
       <item>
        <widget class="QLabel" name="OpponentLP">
         <property name="text">
-         <string>0</string>
+         <string>LP : 0</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -172,7 +175,7 @@
       <item>
        <widget class="QLabel" name="PlayerLP">
         <property name="text">
-         <string>0</string>
+         <string>LP : 0</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -186,7 +189,7 @@
       <item>
        <widget class="QTabWidget" name="CardPreview">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="Image">
          <attribute name="title">

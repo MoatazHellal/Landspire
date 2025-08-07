@@ -23,6 +23,7 @@ qt_add_executable(Landspire
     cardfactory.h cardfactory.cpp
     inputdialog.h inputdialog.cpp
     cardcollectionviewer.h cardcollectionviewer.cpp
+    firebaseapi.h firebaseapi.cpp
 
 )
 

@@ -89,18 +89,20 @@ public:
 
         ShowdownField = new QWidget(centralwidget);
         ShowdownField->setObjectName("ShowdownField");
-        ShowdownField->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        ShowdownField->setStyleSheet(QString::fromUtf8("	#ShowdownField{	\n"
+"background-color: rgb(255, 255, 255);\n"
 "        border: 2px solid #555;\n"
 "        border-radius: 10px;\n"
-""));
+"}"));
 
         FieldLayout->addWidget(ShowdownField);
 
         PlayerMainField = new QWidget(centralwidget);
         PlayerMainField->setObjectName("PlayerMainField");
-        PlayerMainField->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        PlayerMainField->setStyleSheet(QString::fromUtf8("#PlayerMainField{	\n"
+"		background-color: rgb(255, 255, 255);\n"
 "        border: 2px solid #555;\n"
-"        border-radius: 10px;\n"
+"        border-radius: 10px;}\n"
 ""));
         horizontalLayout_4 = new QHBoxLayout(PlayerMainField);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
@@ -114,9 +116,10 @@ public:
 
         HandWidget = new QWidget(centralwidget);
         HandWidget->setObjectName("HandWidget");
-        HandWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        HandWidget->setStyleSheet(QString::fromUtf8("#HandWidget{\n"
+"		background-color: rgb(255, 255, 255);\n"
 "        border: 2px solid #555;\n"
-"        border-radius: 10px;"));
+"        border-radius: 10px;}"));
         horizontalLayout_3 = new QHBoxLayout(HandWidget);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         HandLayout = new QHBoxLayout();
@@ -267,7 +270,7 @@ public:
 
         retranslateUi(GameWindow);
 
-        CardPreview->setCurrentIndex(1);
+        CardPreview->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(GameWindow);
@@ -276,10 +279,10 @@ public:
     void retranslateUi(QMainWindow *GameWindow)
     {
         GameWindow->setWindowTitle(QCoreApplication::translate("GameWindow", "MainWindow", nullptr));
-        OpponentLP->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
+        OpponentLP->setText(QCoreApplication::translate("GameWindow", "LP : 0", nullptr));
         GraveyardSize->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
         DeckSize->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
-        PlayerLP->setText(QCoreApplication::translate("GameWindow", "0", nullptr));
+        PlayerLP->setText(QCoreApplication::translate("GameWindow", "LP : 0", nullptr));
         ImagePreview->setText(QString());
         CardPreview->setTabText(CardPreview->indexOf(Image), QCoreApplication::translate("GameWindow", "Image", nullptr));
         DescriptionPreview->setText(QString());
