@@ -51,6 +51,8 @@ private:
     void exportDeck(const QString& path);
     void importDeck(const QString& path);
 
+    const QString defaultWindowTitle = "Landspire";
+
     QMenu* landspireMenu;
     QMenu* helpMenu;
 
@@ -61,6 +63,8 @@ private:
     QAction* aboutLandspireAct;
     QAction* gameRulesAct;
 
+    QStringList connectedUsers;
+    QStringListModel* connectedUsersModel;
     QStringListModel* deckModel;
 
     FirebaseAPI* firebase;

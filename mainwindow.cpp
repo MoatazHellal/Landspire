@@ -16,9 +16,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setCentralWidget(ui->tabWidget);
+    this->setWindowTitle(defaultWindowTitle);
 
     createActions();
     createMenus();
+
+    connectedUsersModel = new QStringListModel(this);
+    connectedUsersModel->setStringList(connectedUsers);
+    ui->ConnectedUsersHome->setModel(connectedUsersModel);
 
     ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200, 280, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
@@ -67,6 +72,7 @@ void MainWindow::createActions()
 
     disconnectAct = new QAction(tr("Disconnect"), this);
     connect(disconnectAct, &QAction::triggered, this, &MainWindow::serverDisconnect);
+    disconnectAct->setEnabled(false);
 
     fullscreenAct = new QAction(tr("Fullscreen"), this);
     fullscreenAct->setShortcut(QKeySequence::FullScreen);
@@ -109,8 +115,14 @@ void MainWindow::serverConnect()
     firebase->setDatabaseUrl("https://landspire-57cac-default-rtdb.europe-west1.firebasedatabase.app/");
 
     connect(Dialog, &connectDialogue::loginRequested, this, [this, Dialog](const QString& user, const QString& pass){
-        connect(firebase, &FirebaseAPI::loginSuccess, this, [this, Dialog]() {
+        connect(firebase, &FirebaseAPI::loginSuccess, this, [this, Dialog, user]() {
             qDebug() << "Login success!";
+
+            connectAct->setEnabled(false);
+            disconnectAct->setEnabled(true);
+            this->setWindowTitle(this->windowTitle() + " @" + user);
+            connectedUsers.append(user);
+            connectedUsersModel->setStringList(connectedUsers);
             Dialog->accept();
         });
         connect(firebase, &FirebaseAPI::loginFailed, this, [Dialog](const QString& reason) {
@@ -120,8 +132,14 @@ void MainWindow::serverConnect()
     });
 
     connect(Dialog, &connectDialogue::registerRequested, this, [this, Dialog](const QString& user, const QString& pass){
-        connect(firebase, &FirebaseAPI::registerSuccess, this, [this, Dialog]() {
+        connect(firebase, &FirebaseAPI::registerSuccess, this, [this, Dialog, user]() {
             qDebug() << "Register success!";
+
+            connectAct->setEnabled(false);
+            disconnectAct->setEnabled(true);
+            this->setWindowTitle(this->windowTitle() + " @" + user);
+            connectedUsers.append(user);
+            connectedUsersModel->setStringList(connectedUsers);
             Dialog->accept();
         });
         connect(firebase, &FirebaseAPI::registerFailed, this, [Dialog](const QString& reason) {
@@ -136,6 +154,9 @@ void MainWindow::serverConnect()
 void MainWindow::serverDisconnect()
 {
 
+    connectAct->setEnabled(true);
+    disconnectAct->setEnabled(false);
+    this->setWindowTitle(defaultWindowTitle);
 }
 
 void MainWindow::fullscreen()

@@ -173,6 +173,11 @@ void GameWindow::viewDeck()
     foreach (auto cardPreview, viewer->cardPreviews()) {
         connect(cardPreview, &cardWidget::hovered, this, &GameWindow::setCardPreview);
     }
+
+    connect(viewer, &QObject::destroyed, this, [this]() {
+        shuffleDeck();
+    });
+
     viewer->setAttribute(Qt::WA_DeleteOnClose);
     viewer->show();
     log("You're viewing your deck");

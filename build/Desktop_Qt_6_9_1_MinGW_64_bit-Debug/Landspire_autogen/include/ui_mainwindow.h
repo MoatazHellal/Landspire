@@ -36,7 +36,7 @@ public:
     QWidget *tab;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
-    QListView *listView;
+    QListView *ConnectedUsersHome;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_5;
     QHBoxLayout *horizontalLayout_3;
@@ -97,10 +97,10 @@ public:
 
         horizontalLayout_2->addWidget(label);
 
-        listView = new QListView(tab);
-        listView->setObjectName("listView");
+        ConnectedUsersHome = new QListView(tab);
+        ConnectedUsersHome->setObjectName("ConnectedUsersHome");
 
-        horizontalLayout_2->addWidget(listView);
+        horizontalLayout_2->addWidget(ConnectedUsersHome);
 
         horizontalLayout_2->setStretch(0, 3);
         horizontalLayout_2->setStretch(1, 2);
@@ -272,7 +272,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
         tabWidget_2->setCurrentIndex(0);
 
 
