@@ -9,6 +9,8 @@
 #include <QMimeData>
 #include <QFile>
 #include <QFileDialog>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,9 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     createActions();
     createMenus();
 
-    connectedUsersModel = new QStringListModel(this);
-    connectedUsersModel->setStringList(connectedUsers);
-    ui->ConnectedUsersHome->setModel(connectedUsersModel);
 
     ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200, 280, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
@@ -121,8 +120,19 @@ void MainWindow::serverConnect()
             connectAct->setEnabled(false);
             disconnectAct->setEnabled(true);
             this->setWindowTitle(this->windowTitle() + " @" + user);
-            connectedUsers.append(user);
-            connectedUsersModel->setStringList(connectedUsers);
+            ui->StatusLabel->setText("You are connected as " + user);
+
+            currentUsername = user;
+
+            QJsonObject userData;
+            userData["username"] = user;
+            QJsonDocument doc(userData);
+            QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/connectedUsers/" + user + ".json"));
+            request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+            firebase->getNetworkManager()->put(request, doc.toJson());
+
+            startListeningForConnectedUsers();
+
             Dialog->accept();
         });
         connect(firebase, &FirebaseAPI::loginFailed, this, [Dialog](const QString& reason) {
@@ -138,8 +148,7 @@ void MainWindow::serverConnect()
             connectAct->setEnabled(false);
             disconnectAct->setEnabled(true);
             this->setWindowTitle(this->windowTitle() + " @" + user);
-            connectedUsers.append(user);
-            connectedUsersModel->setStringList(connectedUsers);
+
             Dialog->accept();
         });
         connect(firebase, &FirebaseAPI::registerFailed, this, [Dialog](const QString& reason) {
@@ -153,11 +162,51 @@ void MainWindow::serverConnect()
 
 void MainWindow::serverDisconnect()
 {
+    QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/connectedUsers/" + currentUsername + ".json"));
+    firebase->getNetworkManager()->deleteResource(request);
 
     connectAct->setEnabled(true);
     disconnectAct->setEnabled(false);
     this->setWindowTitle(defaultWindowTitle);
+    ui->StatusLabel->setText("You are not connected");
 }
+
+void MainWindow::startListeningForConnectedUsers()
+{
+    QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/connectedUsers.json"));
+    request.setRawHeader("Accept", "text/event-stream");
+
+    connectedUsersReply = firebase->getNetworkManager()->get(request);
+
+    connect(connectedUsersReply, &QIODevice::readyRead, this, [this]() {
+        while (connectedUsersReply->canReadLine()) {
+            QByteArray line = connectedUsersReply->readLine();
+            if (line.startsWith("data: ")) {
+                QString jsonStr = line.mid(6).trimmed();
+                if (!jsonStr.isEmpty() && jsonStr != "null") {
+                    QJsonDocument doc = QJsonDocument::fromJson(jsonStr.toUtf8());
+                    if (doc.isObject()) {
+                        QStringList users;
+                        QJsonObject obj = doc.object();
+                        for (auto it = obj.begin(); it != obj.end(); ++it) {
+                            QString username = it.value().toObject()["username"].toString();
+                            users << username;
+                        }
+                        updateConnectedUsersList(users);
+                    }
+                }
+            }
+        }
+    });
+}
+
+void MainWindow::updateConnectedUsersList(const QStringList &users)
+{
+    auto *model = new QStringListModel(users, this);
+    ui->ConnectedUsersHome->setModel(model);
+    ui->ConnectedUsersLobby->setModel(model);
+}
+
 
 void MainWindow::fullscreen()
 {

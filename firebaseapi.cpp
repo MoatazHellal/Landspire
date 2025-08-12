@@ -74,3 +74,13 @@ void FirebaseAPI::onLoginReply(QNetworkReply* reply,const QString& password)
 
     reply->deleteLater();
 }
+
+QNetworkAccessManager* FirebaseAPI::getNetworkManager()
+{
+    return networkManager;
+}
+
+QString FirebaseAPI::getDatabaseUrl()
+{
+    return databaseUrl;
+}

@@ -36,6 +36,10 @@ public:
     QWidget *tab;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
+    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *StatusLabel;
+    QPushButton *RefreshButton;
     QListView *ConnectedUsersHome;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_5;
@@ -68,7 +72,8 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
-    QListView *listView_3;
+    QPushButton *pushButton_3;
+    QListView *ConnectedUsersLobby;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -97,13 +102,41 @@ public:
 
         horizontalLayout_2->addWidget(label);
 
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName("verticalLayout_4");
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName("horizontalLayout_4");
+        StatusLabel = new QLabel(tab);
+        StatusLabel->setObjectName("StatusLabel");
+
+        horizontalLayout_4->addWidget(StatusLabel);
+
+        RefreshButton = new QPushButton(tab);
+        RefreshButton->setObjectName("RefreshButton");
+
+        horizontalLayout_4->addWidget(RefreshButton);
+
+        horizontalLayout_4->setStretch(0, 10);
+        horizontalLayout_4->setStretch(1, 1);
+
+        verticalLayout_4->addLayout(horizontalLayout_4);
+
         ConnectedUsersHome = new QListView(tab);
         ConnectedUsersHome->setObjectName("ConnectedUsersHome");
+        QFont font;
+        font.setFamilies({QString::fromUtf8("Segoe UI")});
+        font.setPointSize(9);
+        ConnectedUsersHome->setFont(font);
 
-        horizontalLayout_2->addWidget(ConnectedUsersHome);
+        verticalLayout_4->addWidget(ConnectedUsersHome);
 
-        horizontalLayout_2->setStretch(0, 3);
-        horizontalLayout_2->setStretch(1, 2);
+        verticalLayout_4->setStretch(0, 1);
+        verticalLayout_4->setStretch(1, 20);
+
+        horizontalLayout_2->addLayout(verticalLayout_4);
+
+        horizontalLayout_2->setStretch(0, 2);
+        horizontalLayout_2->setStretch(1, 1);
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName("tab_2");
@@ -244,16 +277,22 @@ public:
 
         horizontalLayout->addWidget(pushButton_2);
 
+        pushButton_3 = new QPushButton(tab_3);
+        pushButton_3->setObjectName("pushButton_3");
+        pushButton_3->setEnabled(false);
+
+        horizontalLayout->addWidget(pushButton_3);
+
 
         verticalLayout_3->addLayout(horizontalLayout);
 
 
         horizontalLayout_8->addLayout(verticalLayout_3);
 
-        listView_3 = new QListView(tab_3);
-        listView_3->setObjectName("listView_3");
+        ConnectedUsersLobby = new QListView(tab_3);
+        ConnectedUsersLobby->setObjectName("ConnectedUsersLobby");
 
-        horizontalLayout_8->addWidget(listView_3);
+        horizontalLayout_8->addWidget(ConnectedUsersLobby);
 
         horizontalLayout_8->setStretch(0, 3);
         horizontalLayout_8->setStretch(1, 2);
@@ -283,6 +322,8 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QString());
+        StatusLabel->setText(QCoreApplication::translate("MainWindow", "You are not connected", nullptr));
+        RefreshButton->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Home", nullptr));
         CardPreview->setText(QString());
         tabWidget_2->setTabText(tabWidget_2->indexOf(Image), QCoreApplication::translate("MainWindow", "Image", nullptr));
@@ -295,6 +336,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Deck", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Create Room", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "Join Room", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Lobby", nullptr));
     } // retranslateUi
 

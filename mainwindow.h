@@ -6,6 +6,7 @@
 #include "cardwidget.h"
 #include "firebaseapi.h"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -51,6 +52,9 @@ private:
     void exportDeck(const QString& path);
     void importDeck(const QString& path);
 
+    void startListeningForConnectedUsers();
+    void updateConnectedUsersList(const QStringList &users);
+
     const QString defaultWindowTitle = "Landspire";
 
     QMenu* landspireMenu;
@@ -68,5 +72,7 @@ private:
     QStringListModel* deckModel;
 
     FirebaseAPI* firebase;
+    QNetworkReply* connectedUsersReply = nullptr;
+    QString currentUsername;
 };
 #endif // MAINWINDOW_H

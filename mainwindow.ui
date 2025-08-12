@@ -30,7 +30,7 @@
        <attribute name="title">
         <string>Home</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,1">
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
@@ -39,7 +39,36 @@
          </widget>
         </item>
         <item>
-         <widget class="QListView" name="ConnectedUsersHome"/>
+         <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,20">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="10,1">
+            <item>
+             <widget class="QLabel" name="StatusLabel">
+              <property name="text">
+               <string>You are not connected</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="RefreshButton">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QListView" name="ConnectedUsersHome">
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>9</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -214,12 +243,22 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_3">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Start</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QListView" name="listView_3"/>
+         <widget class="QListView" name="ConnectedUsersLobby"/>
         </item>
        </layout>
       </widget>

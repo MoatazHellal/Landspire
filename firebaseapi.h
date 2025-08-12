@@ -11,6 +11,8 @@ class FirebaseAPI : public QObject
 
 public:
     explicit FirebaseAPI(QObject *parent = nullptr);
+    QNetworkAccessManager* getNetworkManager();
+    QString getDatabaseUrl();
     void setDatabaseUrl(const QString& url);
 
     void registerUser(const QString& username, const QString& password);
