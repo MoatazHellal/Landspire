@@ -23,7 +23,7 @@ public:
 
 protected:
     bool eventFilter(QObject* watched, QEvent* event) override;
-
+    void closeEvent(QCloseEvent *event) override;
 
 private slots:
     void serverConnect();
@@ -53,6 +53,7 @@ private:
     void importDeck(const QString& path);
 
     void startListeningForConnectedUsers();
+    void fetchConnectedUsersOnce();
     void updateConnectedUsersList(const QStringList &users);
 
     const QString defaultWindowTitle = "Landspire";

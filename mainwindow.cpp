@@ -22,8 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     createActions();
     createMenus();
-
-
+    firebase = new FirebaseAPI(this);
+    firebase->setDatabaseUrl("https://landspire-57cac-default-rtdb.europe-west1.firebasedatabase.app/");
+    connect(ui->RefreshButton, &QPushButton::clicked, this, &MainWindow::fetchConnectedUsersOnce);
     ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200, 280, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     deckModel = new QStringListModel(this);
@@ -110,8 +111,6 @@ void MainWindow::createMenus()
 void MainWindow::serverConnect()
 {
     connectDialogue* Dialog = new connectDialogue(this);
-    firebase = new FirebaseAPI(this);
-    firebase->setDatabaseUrl("https://landspire-57cac-default-rtdb.europe-west1.firebasedatabase.app/");
 
     connect(Dialog, &connectDialogue::loginRequested, this, [this, Dialog](const QString& user, const QString& pass){
         connect(firebase, &FirebaseAPI::loginSuccess, this, [this, Dialog, user]() {
@@ -205,6 +204,29 @@ void MainWindow::updateConnectedUsersList(const QStringList &users)
     auto *model = new QStringListModel(users, this);
     ui->ConnectedUsersHome->setModel(model);
     ui->ConnectedUsersLobby->setModel(model);
+}
+
+void MainWindow::fetchConnectedUsersOnce()
+{
+    QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/connectedUsers.json"));
+    auto *reply = firebase->getNetworkManager()->get(request);
+
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        QByteArray body = reply->readAll();
+        reply->deleteLater();
+
+        QStringList users;
+        if (!body.isEmpty() && body != "null") {
+            QJsonDocument doc = QJsonDocument::fromJson(body);
+            if (doc.isObject()) {
+                QJsonObject obj = doc.object();
+                for (auto it = obj.begin(); it != obj.end(); ++it) {
+                    users << it.value().toObject().value("username").toString(it.key());
+                }
+            }
+        }
+        updateConnectedUsersList(users);
+    });
 }
 
 
@@ -379,4 +401,13 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
     }
 
     return QMainWindow::eventFilter(watched, event);
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (!currentUsername.isEmpty() && firebase) {
+        QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/connectedUsers/" + currentUsername + ".json"));
+        firebase->getNetworkManager()->deleteResource(request);
+    }
+    QMainWindow::closeEvent(event);
 }
