@@ -56,6 +56,11 @@ private:
     void fetchConnectedUsersOnce();
     void updateConnectedUsersList(const QStringList &users);
 
+    void createRoom();
+    void joinRoom();
+    void startListeningForRooms();
+    void updateRoomsList(const QStringList &rooms);
+
     const QString defaultWindowTitle = "Landspire";
 
     QMenu* landspireMenu;
@@ -74,6 +79,7 @@ private:
 
     FirebaseAPI* firebase;
     QNetworkReply* connectedUsersReply = nullptr;
+    QNetworkReply* roomsReply = nullptr;
     QString currentUsername;
 };
 #endif // MAINWINDOW_H

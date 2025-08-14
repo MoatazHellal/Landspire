@@ -17,6 +17,8 @@ public:
 
     void registerUser(const QString& username, const QString& password);
     void loginUser(const QString& username, const QString& password);
+    void createRoom(const QString &username);
+    void joinRoom(const QString &roomName, const QString &username);
 
 signals:
     void loginSuccess();

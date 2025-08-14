@@ -68,11 +68,11 @@ public:
     QWidget *tab_3;
     QHBoxLayout *horizontalLayout_8;
     QVBoxLayout *verticalLayout_3;
-    QListView *listView_2;
+    QListView *RoomsList;
     QHBoxLayout *horizontalLayout;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
+    QPushButton *CreateRoomBtn;
+    QPushButton *JoinRoomBtn;
+    QPushButton *StartGameBtn;
     QListView *ConnectedUsersLobby;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -260,28 +260,28 @@ public:
         horizontalLayout_8->setObjectName("horizontalLayout_8");
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName("verticalLayout_3");
-        listView_2 = new QListView(tab_3);
-        listView_2->setObjectName("listView_2");
+        RoomsList = new QListView(tab_3);
+        RoomsList->setObjectName("RoomsList");
 
-        verticalLayout_3->addWidget(listView_2);
+        verticalLayout_3->addWidget(RoomsList);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        pushButton = new QPushButton(tab_3);
-        pushButton->setObjectName("pushButton");
+        CreateRoomBtn = new QPushButton(tab_3);
+        CreateRoomBtn->setObjectName("CreateRoomBtn");
 
-        horizontalLayout->addWidget(pushButton);
+        horizontalLayout->addWidget(CreateRoomBtn);
 
-        pushButton_2 = new QPushButton(tab_3);
-        pushButton_2->setObjectName("pushButton_2");
+        JoinRoomBtn = new QPushButton(tab_3);
+        JoinRoomBtn->setObjectName("JoinRoomBtn");
 
-        horizontalLayout->addWidget(pushButton_2);
+        horizontalLayout->addWidget(JoinRoomBtn);
 
-        pushButton_3 = new QPushButton(tab_3);
-        pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setEnabled(false);
+        StartGameBtn = new QPushButton(tab_3);
+        StartGameBtn->setObjectName("StartGameBtn");
+        StartGameBtn->setEnabled(false);
 
-        horizontalLayout->addWidget(pushButton_3);
+        horizontalLayout->addWidget(StartGameBtn);
 
 
         verticalLayout_3->addLayout(horizontalLayout);
@@ -311,7 +311,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
         tabWidget_2->setCurrentIndex(0);
 
 
@@ -334,9 +334,9 @@ public:
         CardCount->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         ClearDeck->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Deck", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Create Room", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Join Room", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
+        CreateRoomBtn->setText(QCoreApplication::translate("MainWindow", "Create Room", nullptr));
+        JoinRoomBtn->setText(QCoreApplication::translate("MainWindow", "Join Room", nullptr));
+        StartGameBtn->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Lobby", nullptr));
     } // retranslateUi
 

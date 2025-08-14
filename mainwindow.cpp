@@ -22,9 +22,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     createActions();
     createMenus();
+
     firebase = new FirebaseAPI(this);
     firebase->setDatabaseUrl("https://landspire-57cac-default-rtdb.europe-west1.firebasedatabase.app/");
+
     connect(ui->RefreshButton, &QPushButton::clicked, this, &MainWindow::fetchConnectedUsersOnce);
+    connect(ui->CreateRoomBtn, &QPushButton::clicked, this, &MainWindow::createRoom);
     ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200, 280, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     deckModel = new QStringListModel(this);
@@ -131,6 +134,7 @@ void MainWindow::serverConnect()
             firebase->getNetworkManager()->put(request, doc.toJson());
 
             startListeningForConnectedUsers();
+            startListeningForRooms();
 
             Dialog->accept();
         });
@@ -147,6 +151,19 @@ void MainWindow::serverConnect()
             connectAct->setEnabled(false);
             disconnectAct->setEnabled(true);
             this->setWindowTitle(this->windowTitle() + " @" + user);
+            ui->StatusLabel->setText("You are connected as " + user);
+
+            currentUsername = user;
+
+            QJsonObject userData;
+            userData["username"] = user;
+            QJsonDocument doc(userData);
+            QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/connectedUsers/" + user + ".json"));
+            request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+            firebase->getNetworkManager()->put(request, doc.toJson());
+
+            startListeningForConnectedUsers();
+            startListeningForRooms();
 
             Dialog->accept();
         });
@@ -229,7 +246,55 @@ void MainWindow::fetchConnectedUsersOnce()
     });
 }
 
+void MainWindow::startListeningForRooms()
+{
+    QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/rooms.json"));
+    request.setRawHeader("Accept", "text/event-stream");
 
+    roomsReply = firebase->getNetworkManager()->get(request);
+
+    connect(roomsReply, &QIODevice::readyRead, this, [this]() {
+        while (roomsReply->canReadLine()) {
+            QByteArray line = roomsReply->readLine();
+            if (line.startsWith("data: ")) {
+                QString jsonStr = line.mid(6).trimmed();
+                if (!jsonStr.isEmpty() && jsonStr != "null") {
+                    QJsonDocument doc = QJsonDocument::fromJson(jsonStr.toUtf8());
+                    if (!doc.isObject())
+                        continue;
+
+                    QJsonObject rootObj = doc.object();
+
+                    // Check for the "data" field that contains the actual rooms
+                    if (rootObj.contains("data") && rootObj["data"].isObject()) {
+                        QJsonObject roomsObj = rootObj["data"].toObject();
+                        QStringList roomList;
+                        for (auto it = roomsObj.begin(); it != roomsObj.end(); ++it) {
+                            roomList << it.key(); // now this is "marcos_room"
+                        }
+                        updateRoomsList(roomList);
+                    }
+                }
+            }
+        }
+    });
+}
+
+void MainWindow::updateRoomsList(const QStringList &rooms)
+{
+    auto *model = new QStringListModel(rooms, this);
+    ui->RoomsList->setModel(model);
+}
+
+void MainWindow::createRoom()
+{
+    firebase->createRoom(currentUsername);
+}
+
+void MainWindow::joinRoom()
+{
+
+}
 void MainWindow::fullscreen()
 {
     if (isFullScreen()) {
