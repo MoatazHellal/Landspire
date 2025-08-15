@@ -1122,9 +1122,9 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/server.h
  mdp:C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/Landspire_autogen/moc_predefs.h
  mdp:C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/server.h
 C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/connectdialogue.cpp
+C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/main.cpp
 C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.cpp
  uic:ui_mainwindow.h
-C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/main.cpp
 C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/server.cpp
 C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/clientconnection.h
  mmc:Q_OBJECT
@@ -1468,7 +1468,6 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/clientconnection.h
  mdp:C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
  mdp:C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/Landspire_autogen/moc_predefs.h
  mdp:C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/clientconnection.h
-C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/clientconnection.cpp
 C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/gamewindow.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QString
@@ -1849,6 +1848,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/gamewindow.h
  mdp:C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardAffinities.h
  mdp:C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardwidget.h
  mdp:C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/gamewindow.h
+C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/clientconnection.cpp
 C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardAffinities.h
 C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardwidget.h
  mmc:Q_OBJECT

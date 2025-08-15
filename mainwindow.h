@@ -57,7 +57,7 @@ private:
     void updateConnectedUsersList(const QStringList &users);
 
     void createRoom();
-    void joinRoom();
+    void joinRoom(const QString &roomName);
     void startListeningForRooms();
     void updateRoomsList(const QStringList &rooms);
 
@@ -81,5 +81,6 @@ private:
     QNetworkReply* connectedUsersReply = nullptr;
     QNetworkReply* roomsReply = nullptr;
     QString currentUsername;
+    QStringList roomKeyMapping;
 };
 #endif // MAINWINDOW_H

@@ -28,6 +28,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->RefreshButton, &QPushButton::clicked, this, &MainWindow::fetchConnectedUsersOnce);
     connect(ui->CreateRoomBtn, &QPushButton::clicked, this, &MainWindow::createRoom);
+    connect(ui->JoinRoomBtn, &QPushButton::clicked, this, [=]() {
+    QModelIndex index = ui->RoomsList->currentIndex(); // get selected index
+    if (!index.isValid()) {
+        qDebug() << "No selection";
+        return;
+    }
+    int row = index.row();
+    QString selectedRoom = roomKeyMapping.value(row);
+    joinRoom(selectedRoom);
+    });
     ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200, 280, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     deckModel = new QStringListModel(this);
@@ -254,31 +264,71 @@ void MainWindow::startListeningForRooms()
     roomsReply = firebase->getNetworkManager()->get(request);
 
     connect(roomsReply, &QIODevice::readyRead, this, [this]() {
+        static QMap<QString, QJsonObject> roomsCache; // keep local copy
+
         while (roomsReply->canReadLine()) {
             QByteArray line = roomsReply->readLine();
             if (line.startsWith("data: ")) {
                 QString jsonStr = line.mid(6).trimmed();
-                if (!jsonStr.isEmpty() && jsonStr != "null") {
-                    QJsonDocument doc = QJsonDocument::fromJson(jsonStr.toUtf8());
-                    if (!doc.isObject())
-                        continue;
+                if (jsonStr.isEmpty() || jsonStr == "null")
+                    continue;
 
-                    QJsonObject rootObj = doc.object();
+                QJsonDocument doc = QJsonDocument::fromJson(jsonStr.toUtf8());
+                if (!doc.isObject())
+                    continue;
 
-                    // Check for the "data" field that contains the actual rooms
-                    if (rootObj.contains("data") && rootObj["data"].isObject()) {
-                        QJsonObject roomsObj = rootObj["data"].toObject();
-                        QStringList roomList;
-                        for (auto it = roomsObj.begin(); it != roomsObj.end(); ++it) {
-                            roomList << it.key(); // now this is "marcos_room"
+                QJsonObject rootObj = doc.object();
+                if (!rootObj.contains("data"))
+                    continue;
+
+                QString path = rootObj.value("path").toString();
+                QJsonValue dataVal = rootObj.value("data");
+
+                if (path == "/") {
+                    // Full update
+                    roomsCache.clear();
+                    if (dataVal.isObject()) {
+                        QJsonObject allRooms = dataVal.toObject();
+                        for (auto it = allRooms.begin(); it != allRooms.end(); ++it) {
+                            if (it.value().isObject())
+                                roomsCache[it.key()] = it.value().toObject();
                         }
-                        updateRoomsList(roomList);
+                    }
+                } else {
+                    // Patch update
+                    QString roomName = path.mid(1); // remove leading "/"
+                    if (dataVal.isNull()) {
+                        // Room deleted
+                        roomsCache.remove(roomName);
+                    } else if (dataVal.isObject()) {
+                        roomsCache[roomName] = dataVal.toObject();
                     }
                 }
+
+                // Build formatted room list
+                QStringList displayList;
+                QStringList keyList;
+                for (auto it = roomsCache.begin(); it != roomsCache.end(); ++it) {
+                    QString roomKey = it.key();
+                    QString host = it.value().value("Host").toString();
+                    QString guest = it.value().value("Guest").toString();
+                    if (guest.isEmpty())
+                        guest = "Waiting...";
+                    QString display = QString("Room of %1: %2 VS %3")
+                                          .arg(host)
+                                          .arg(host)
+                                          .arg(guest);
+                    displayList << display;
+                    keyList << roomKey;
+                }
+
+                updateRoomsList(displayList);
+                roomKeyMapping = keyList;
             }
         }
     });
 }
+
 
 void MainWindow::updateRoomsList(const QStringList &rooms)
 {
@@ -291,10 +341,11 @@ void MainWindow::createRoom()
     firebase->createRoom(currentUsername);
 }
 
-void MainWindow::joinRoom()
+void MainWindow::joinRoom(const QString &roomName)
 {
-
+    firebase->joinRoom(roomName, currentUsername);
 }
+
 void MainWindow::fullscreen()
 {
     if (isFullScreen()) {
