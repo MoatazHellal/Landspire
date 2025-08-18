@@ -2,6 +2,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinG
   C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/Landspire_autogen/moc_predefs.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/QFlags \
   C:/Qt/6.9.1/mingw_64/include/QtCore/QIODevice \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/QJsonObject \
   C:/Qt/6.9.1/mingw_64/include/QtCore/QList \
   C:/Qt/6.9.1/mingw_64/include/QtCore/QMetaType \
   C:/Qt/6.9.1/mingw_64/include/QtCore/QObject \
@@ -34,6 +35,8 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinG
   C:/Qt/6.9.1/mingw_64/include/QtCore/qbytearraylist.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qbytearrayview.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qcalendar.h \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/qcborcommon.h \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/qcborvalue.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qchar.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qcompare.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qcompare_impl.h \
@@ -66,6 +69,10 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinG
   C:/Qt/6.9.1/mingw_64/include/QtCore/qiodevicebase.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qiterable.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qiterator.h \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/qjsondocument.h \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/qjsonobject.h \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/qjsonparseerror.h \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/qjsonvalue.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qlatin1stringview.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qline.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qlist.h \
@@ -90,6 +97,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinG
   C:/Qt/6.9.1/mingw_64/include/QtCore/qprocessordetection.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qrefcount.h \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/qregularexpression.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qscopedpointer.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qscopeguard.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qset.h \
@@ -139,6 +147,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinG
   C:/Qt/6.9.1/mingw_64/include/QtCore/qtypes.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qurl.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qutf8stringview.h \
+  C:/Qt/6.9.1/mingw_64/include/QtCore/quuid.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qvariant.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qvarlengtharray.h \
   C:/Qt/6.9.1/mingw_64/include/QtCore/qversiontagging.h \

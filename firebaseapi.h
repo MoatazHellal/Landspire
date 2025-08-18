@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QJsonObject>
 
 class FirebaseAPI : public QObject
 {
@@ -14,6 +15,9 @@ public:
     QNetworkAccessManager* getNetworkManager();
     QString getDatabaseUrl();
     void setDatabaseUrl(const QString& url);
+    QString getHostedRoomKey();
+    QJsonObject getHostedRoom();
+    void setHostedRoom(QJsonObject room);
 
     void registerUser(const QString& username, const QString& password);
     void loginUser(const QString& username, const QString& password);
@@ -33,6 +37,9 @@ private slots:
 private:
     QNetworkAccessManager* networkManager;
     QString databaseUrl;
+
+    QString hostedRoomKey;
+    QJsonObject hostedRoom;
 };
 
 #endif // FIREBASEAPI_H

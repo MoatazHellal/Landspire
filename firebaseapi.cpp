@@ -77,18 +77,28 @@ void FirebaseAPI::onLoginReply(QNetworkReply* reply,const QString& password)
 
 void FirebaseAPI::createRoom(const QString &username)
 {
-QString roomName = tr("Room of ") + username;
-    QJsonObject room;
-    room["Host"] = username;
+    if (!hostedRoomKey.isEmpty()) {
+        QNetworkRequest delReq(QUrl(databaseUrl + "/rooms/" + hostedRoomKey + ".json"));
+        networkManager->deleteResource(delReq);
+        hostedRoomKey.clear();
+        hostedRoom = QJsonObject();
+    }
 
-    QNetworkRequest request(QUrl(databaseUrl + "/rooms/" + roomName + ".json"));
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QString roomName = tr("Room of ") + username;
+        QJsonObject room;
+        room["Host"] = username;
+        room["state"] = "waiting";
 
-    QNetworkReply *reply = networkManager->put(request, QJsonDocument(room).toJson());
-    connect(reply, &QNetworkReply::finished, [reply]() {
-        qDebug() << "Room created" << reply->readAll();
-        reply->deleteLater();
-    });
+        QNetworkRequest request(QUrl(databaseUrl + "/rooms/" + roomName + ".json"));
+        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+        QNetworkReply *reply = networkManager->put(request, QJsonDocument(room).toJson());
+        connect(reply, &QNetworkReply::finished, [=]() {
+            hostedRoomKey = roomName;
+            hostedRoom = room;
+            qDebug() << "Room created" << reply->readAll();
+            reply->deleteLater();
+        });
 }
 
 void FirebaseAPI::joinRoom(const QString &roomName, const QString &username)
@@ -103,6 +113,9 @@ void FirebaseAPI::joinRoom(const QString &roomName, const QString &username)
 
         if (!obj.contains("Guest") || obj["Guest"].toString().isEmpty()) {
             obj["Guest"] = username;
+            if (obj.contains("Host") && !obj["Host"].toString().isEmpty()) {
+                obj["state"] = "ready";
+            }
 
             QNetworkRequest putRequest(QUrl(databaseUrl + "/rooms/" + roomName + ".json"));
             putRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -124,4 +137,19 @@ QNetworkAccessManager* FirebaseAPI::getNetworkManager()
 QString FirebaseAPI::getDatabaseUrl()
 {
     return databaseUrl;
+}
+
+QString FirebaseAPI::getHostedRoomKey()
+{
+    return hostedRoomKey;
+}
+
+QJsonObject FirebaseAPI::getHostedRoom()
+{
+    return hostedRoom;
+}
+
+void FirebaseAPI::setHostedRoom(QJsonObject room)
+{
+    hostedRoom = room;
 }

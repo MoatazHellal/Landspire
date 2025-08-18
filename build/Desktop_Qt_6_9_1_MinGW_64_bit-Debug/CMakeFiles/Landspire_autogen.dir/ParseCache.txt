@@ -376,6 +376,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QFlags
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QIODevice
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QJsonObject
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QList
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QMetaType
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QObject
@@ -408,6 +409,8 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qbytearraylist.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qbytearrayview.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcalendar.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcborcommon.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcborvalue.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qchar.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcompare.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcompare_impl.h
@@ -440,6 +443,10 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qiodevicebase.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qiterable.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qiterator.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qjsondocument.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qjsonobject.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qjsonparseerror.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qjsonvalue.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qlatin1stringview.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qline.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qlist.h
@@ -464,6 +471,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qprocessordetection.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qrect.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qrefcount.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qregularexpression.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qscopedpointer.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qscopeguard.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qset.h
@@ -513,6 +521,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/mainwindow.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qtypes.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qurl.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qutf8stringview.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/quuid.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qvariant.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qvarlengtharray.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qversiontagging.h
@@ -3005,6 +3014,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/firebaseapi.h
  mmc:Q_OBJECT
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QFlags
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QIODevice
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QJsonObject
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QList
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QMetaType
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/QObject
@@ -3035,6 +3045,8 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/firebaseapi.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qbytearraylist.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qbytearrayview.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcalendar.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcborcommon.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcborvalue.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qchar.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcompare.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qcompare_impl.h
@@ -3051,6 +3063,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/firebaseapi.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qdatastream.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qdatetime.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qdebug.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qendian.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qexceptionhandling.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qflags.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qfloat16.h
@@ -3066,6 +3079,10 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/firebaseapi.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qiodevicebase.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qiterable.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qiterator.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qjsondocument.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qjsonobject.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qjsonparseerror.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qjsonvalue.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qlatin1stringview.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qlist.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qlocale.h
@@ -3086,6 +3103,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/firebaseapi.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qpair.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qprocessordetection.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qrefcount.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qregularexpression.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qscopedpointer.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qscopeguard.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qset.h
@@ -3133,6 +3151,7 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/firebaseapi.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qtypes.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qurl.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qutf8stringview.h
+ mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/quuid.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qvariant.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qvarlengtharray.h
  mdp:C:/Qt/6.9.1/mingw_64/include/QtCore/qversiontagging.h

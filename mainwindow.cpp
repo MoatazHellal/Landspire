@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->RefreshButton, &QPushButton::clicked, this, &MainWindow::fetchConnectedUsersOnce);
     connect(ui->CreateRoomBtn, &QPushButton::clicked, this, &MainWindow::createRoom);
     connect(ui->JoinRoomBtn, &QPushButton::clicked, this, [=]() {
-    QModelIndex index = ui->RoomsList->currentIndex(); // get selected index
+    QModelIndex index = ui->RoomsList->currentIndex();
     if (!index.isValid()) {
         qDebug() << "No selection";
         return;
@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     QString selectedRoom = roomKeyMapping.value(row);
     joinRoom(selectedRoom);
     });
+
     ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200, 280, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     deckModel = new QStringListModel(this);
@@ -58,14 +59,12 @@ MainWindow::MainWindow(QWidget *parent)
 
         connect(card, &cardWidget::hovered, this, &MainWindow::setCardPreview);
         connect(card, &cardWidget::rightClicked, this, &MainWindow::addCard);
-
     }
 
     ui->DeckList->setAcceptDrops(true);
     ui->DeckList->setDropIndicatorShown(true);
     ui->DeckList->setDragDropMode(QAbstractItemView::DropOnly);
     ui->DeckList->installEventFilter(this);
-
 
     connect(ui->ClearDeck, &QPushButton::clicked, this, &MainWindow::clearDeck);
     connect(ui->ExportDeck, &QPushButton::clicked, this, &MainWindow::onExportDeckClicked);
@@ -100,7 +99,6 @@ void MainWindow::createActions()
 
     gameRulesAct = new QAction(tr("Game rules"), this);
     connect(gameRulesAct, &QAction::triggered, this, &MainWindow::gameRules);
-
 }
 
 void MainWindow::createMenus()
@@ -292,16 +290,38 @@ void MainWindow::startListeningForRooms()
                         for (auto it = allRooms.begin(); it != allRooms.end(); ++it) {
                             if (it.value().isObject())
                                 roomsCache[it.key()] = it.value().toObject();
+
+                            // 🔽 Extra check for hosted room on full update
+                            if (it.key() == firebase->getHostedRoomKey()) {
+                                firebase->setHostedRoom(it.value().toObject());
+                            }
                         }
                     }
                 } else {
                     // Patch update
                     QString roomName = path.mid(1); // remove leading "/"
                     if (dataVal.isNull()) {
-                        // Room deleted
                         roomsCache.remove(roomName);
                     } else if (dataVal.isObject()) {
                         roomsCache[roomName] = dataVal.toObject();
+
+                        // 🔽 Hosted room sync
+                        if (roomName == firebase->getHostedRoomKey()) {
+                            firebase->setHostedRoom(dataVal.toObject());
+
+                            QString state = firebase->getHostedRoom().value("state").toString();
+                            QString host = firebase->getHostedRoom().value("Host").toString();
+
+                            if (host == currentUsername) {
+                                ui->StartGameBtn->setEnabled(state == "ready");
+                            } else {
+                                ui->StartGameBtn->setEnabled(false);
+                            }
+
+                            if (state == "started") {
+
+                            }
+                        }
                     }
                 }
 
@@ -312,12 +332,14 @@ void MainWindow::startListeningForRooms()
                     QString roomKey = it.key();
                     QString host = it.value().value("Host").toString();
                     QString guest = it.value().value("Guest").toString();
-                    if (guest.isEmpty())
-                        guest = "Waiting...";
-                    QString display = QString("Room of %1: %2 VS %3")
+                    QString state = it.value().value("state").toString();
+                    if (state.isEmpty()) state = "waiting";
+                    if (guest.isEmpty()) guest = "...";
+                    QString display = QString("Room of %1: %2 VS %3 (%4)")
                                           .arg(host)
                                           .arg(host)
-                                          .arg(guest);
+                                          .arg(guest)
+                                          .arg(state);
                     displayList << display;
                     keyList << roomKey;
                 }
