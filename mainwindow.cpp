@@ -123,17 +123,24 @@ void MainWindow::serverConnect()
 {
     connectDialogue* Dialog = new connectDialogue(this);
 
+    // Disconnect any previous login/register signal handlers to prevent stacking
+    disconnect(firebase, &FirebaseAPI::loginSuccess, this, nullptr);
+    disconnect(firebase, &FirebaseAPI::loginFailed, this, nullptr);
+    disconnect(firebase, &FirebaseAPI::registerSuccess, this, nullptr);
+    disconnect(firebase, &FirebaseAPI::registerFailed, this, nullptr);
+
     connect(Dialog, &connectDialogue::loginRequested, this, [this, Dialog](const QString& user, const QString& pass){
         connect(firebase, &FirebaseAPI::loginSuccess, this, [this, Dialog, user]() {
             qDebug() << "Login success!";
 
             connectAct->setEnabled(false);
             disconnectAct->setEnabled(true);
-            this->setWindowTitle(this->windowTitle() + " @" + user);
+            this->setWindowTitle(defaultWindowTitle + " @" + user);
             ui->StatusLabel->setText("You are connected as " + user);
 
             currentUsername = user;
 
+            // Add user to Firebase
             QJsonObject userData;
             userData["username"] = user;
             QJsonDocument doc(userData);
@@ -141,6 +148,7 @@ void MainWindow::serverConnect()
             request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
             firebase->getNetworkManager()->put(request, doc.toJson());
 
+            // Start listening after the user has been added
             startListeningForConnectedUsers();
             startListeningForRooms();
 
@@ -158,7 +166,7 @@ void MainWindow::serverConnect()
 
             connectAct->setEnabled(false);
             disconnectAct->setEnabled(true);
-            this->setWindowTitle(this->windowTitle() + " @" + user);
+            this->setWindowTitle(defaultWindowTitle + " @" + user);
             ui->StatusLabel->setText("You are connected as " + user);
 
             currentUsername = user;
@@ -186,8 +194,21 @@ void MainWindow::serverConnect()
 
 void MainWindow::serverDisconnect()
 {
-    QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/connectedUsers/" + currentUsername + ".json"));
-    firebase->getNetworkManager()->deleteResource(request);
+    if (!currentUsername.isEmpty()) {
+        // Remove user from Firebase
+        QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/connectedUsers/" + currentUsername + ".json"));
+        firebase->getNetworkManager()->deleteResource(request);
+    }
+
+    // Stop listening and clean up stream
+    if (connectedUsersReply) {
+        connectedUsersReply->abort();
+        connectedUsersReply->deleteLater();
+        connectedUsersReply = nullptr;
+    }
+
+    currentUsername.clear();
+    updateConnectedUsersList({});
 
     connectAct->setEnabled(true);
     disconnectAct->setEnabled(false);
@@ -197,6 +218,13 @@ void MainWindow::serverDisconnect()
 
 void MainWindow::startListeningForConnectedUsers()
 {
+    // Clean up previous listener if any
+    if (connectedUsersReply) {
+        connectedUsersReply->abort();
+        connectedUsersReply->deleteLater();
+        connectedUsersReply = nullptr;
+    }
+
     QNetworkRequest request(QUrl(firebase->getDatabaseUrl() + "/connectedUsers.json"));
     request.setRawHeader("Accept", "text/event-stream");
 
@@ -221,6 +249,10 @@ void MainWindow::startListeningForConnectedUsers()
                 }
             }
         }
+    });
+    connect(connectedUsersReply, &QNetworkReply::finished, this, [this]() {
+        qDebug() << "ConnectedUsers stream finished. Restarting...";
+        startListeningForConnectedUsers(); // auto-reconnect
     });
 }
 
