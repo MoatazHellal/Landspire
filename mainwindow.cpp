@@ -39,6 +39,10 @@ MainWindow::MainWindow(QWidget *parent)
     joinRoom(selectedRoom);
     });
 
+    connect(ui->StartGameBtn, &QPushButton::clicked, this, [=](){
+
+    });
+
     ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200, 280, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     deckModel = new QStringListModel(this);
@@ -326,6 +330,18 @@ void MainWindow::startListeningForRooms()
                             // 🔽 Extra check for hosted room on full update
                             if (it.key() == firebase->getHostedRoomKey()) {
                                 firebase->setHostedRoom(it.value().toObject());
+                                QString state = firebase->getHostedRoom().value("state").toString();
+                                QString host = firebase->getHostedRoom().value("Host").toString();
+
+                                if (host == currentUsername) {
+                                    ui->StartGameBtn->setEnabled(state == "ready");
+                                } else {
+                                    ui->StartGameBtn->setEnabled(false);
+                                }
+
+                                if (state == "started") {
+
+                                }
                             }
                         }
                     }
