@@ -424,4 +424,5 @@ C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/build/Desktop_Qt_6_9_1_MinG
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
   C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardAffinities.h \
   C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/cardwidget.h \
-  C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/firebaseapi.h
+  C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/firebaseapi.h \
+  C:/Users/user/Desktop/Blo9Blo9/Projects/Qt/Landspire/gamewindow.h

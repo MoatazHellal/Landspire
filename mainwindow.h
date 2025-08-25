@@ -5,6 +5,7 @@
 #include <QStringListModel>
 #include "cardwidget.h"
 #include "firebaseapi.h"
+#include "gamewindow.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -72,6 +73,8 @@ private:
     QAction* exitAct;
     QAction* aboutLandspireAct;
     QAction* gameRulesAct;
+
+    GameWindow* gameWindow = nullptr;
 
     QStringList connectedUsers;
     QStringListModel* connectedUsersModel;

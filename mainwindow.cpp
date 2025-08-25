@@ -39,8 +39,14 @@ MainWindow::MainWindow(QWidget *parent)
     joinRoom(selectedRoom);
     });
 
-    connect(ui->StartGameBtn, &QPushButton::clicked, this, [=](){
+    connect(ui->StartGameBtn, &QPushButton::clicked, this, [this]() {
+        QString hostedRoomKey = firebase->getHostedRoomKey();
+        if (hostedRoomKey.isEmpty()) return;
 
+        QUrl url(firebase->getDatabaseUrl() + "/rooms/" + hostedRoomKey + "/state.json");
+        QNetworkRequest req(url);
+        req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+        firebase->getNetworkManager()->put(req, "\"started\""); // push started state
     });
 
     ui->CardPreview->setPixmap(QPixmap(":/cards/card.png").scaled(200, 280, Qt::KeepAspectRatio, Qt::SmoothTransformation));
@@ -340,39 +346,68 @@ void MainWindow::startListeningForRooms()
                                 }
 
                                 if (state == "started") {
-
+                                    if (!gameWindow) {
+                                        gameWindow = new GameWindow();
+                                        gameWindow->setAttribute(Qt::WA_DeleteOnClose);
+                                        connect(gameWindow, &QObject::destroyed, this, [this]() {
+                                            gameWindow = nullptr;
+                                        });
+                                        gameWindow->show();
+                                    }
                                 }
                             }
                         }
                     }
                 } else {
                     // Patch update
-                    QString roomName = path.mid(1); // remove leading "/"
+                    QStringList parts = path.split("/", Qt::SkipEmptyParts);
+                    if (parts.isEmpty()) return;
+
+                    QString roomName = parts[0]; // always the ROOM_ID
+
                     if (dataVal.isNull()) {
                         roomsCache.remove(roomName);
-                    } else if (dataVal.isObject()) {
-                        roomsCache[roomName] = dataVal.toObject();
+                    } else {
+                        if (!roomsCache.contains(roomName))
+                            roomsCache[roomName] = QJsonObject(); // init if missing
 
-                        // 🔽 Hosted room sync
-                        if (roomName == firebase->getHostedRoomKey()) {
-                            firebase->setHostedRoom(dataVal.toObject());
+                        if (dataVal.isObject()) {
+                            // Whole room replaced
+                            roomsCache[roomName] = dataVal.toObject();
+                        } else if (parts.size() == 2) {
+                            // Partial update like /ROOM_ID/state
+                            QString field = parts[1];
+                            QJsonObject roomObj = roomsCache[roomName];
+                            roomObj[field] = dataVal;
+                            roomsCache[roomName] = roomObj;
+                        }
+                    }
 
-                            QString state = firebase->getHostedRoom().value("state").toString();
-                            QString host = firebase->getHostedRoom().value("Host").toString();
+                    // 🔽 Hosted room sync
+                    if (roomName == firebase->getHostedRoomKey()) {
+                        firebase->setHostedRoom(roomsCache[roomName]);
 
-                            if (host == currentUsername) {
-                                ui->StartGameBtn->setEnabled(state == "ready");
-                            } else {
-                                ui->StartGameBtn->setEnabled(false);
-                            }
+                        QString state = firebase->getHostedRoom().value("state").toString();
+                        QString host = firebase->getHostedRoom().value("Host").toString();
 
-                            if (state == "started") {
+                        if (host == currentUsername) {
+                            ui->StartGameBtn->setEnabled(state == "ready");
+                        } else {
+                            ui->StartGameBtn->setEnabled(false);
+                        }
 
+                        if (state == "started") {
+                            if (!gameWindow) {
+                                gameWindow = new GameWindow();
+                                gameWindow->setAttribute(Qt::WA_DeleteOnClose);
+                                connect(gameWindow, &QObject::destroyed, this, [this]() {
+                                    gameWindow = nullptr;
+                                });
+                                gameWindow->show();
                             }
                         }
                     }
                 }
-
                 // Build formatted room list
                 QStringList displayList;
                 QStringList keyList;
